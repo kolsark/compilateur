@@ -4,11 +4,114 @@ State 0:
 ## LR(1) items:
 main' -> . main [ # ]
 ## Transitions:
--- On EOF shift to state 1
--- On main shift to state 2
+-- On STRING shift to state 1
+-- On EOF shift to state 10
+-- On program shift to state 11
+-- On main shift to state 13
+-- On argument_list shift to state 14
+-- On argument shift to state 22
 ## Reductions:
+-- On INT FLOAT BOOL_LITERAL
+--   reduce production argument_list ->
 
 State 1:
+## Known stack suffix:
+## STRING
+## LR(1) items:
+argument -> STRING . type_expr [ SEMICOLON INT FLOAT BOOL_LITERAL ]
+## Transitions:
+-- On POS shift to state 2
+-- On POINT shift to state 3
+-- On INT shift to state 4
+-- On FLOAT shift to state 5
+-- On COLOR shift to state 6
+-- On BOOL shift to state 7
+-- On type_expr shift to state 8
+## Reductions:
+
+State 2:
+## Known stack suffix:
+## POS
+## LR(1) items:
+type_expr -> POS . [ SEMICOLON LIST INT FLOAT BOOL_LITERAL ]
+## Transitions:
+## Reductions:
+-- On SEMICOLON LIST INT FLOAT BOOL_LITERAL
+--   reduce production type_expr -> POS
+
+State 3:
+## Known stack suffix:
+## POINT
+## LR(1) items:
+type_expr -> POINT . [ SEMICOLON LIST INT FLOAT BOOL_LITERAL ]
+## Transitions:
+## Reductions:
+-- On SEMICOLON LIST INT FLOAT BOOL_LITERAL
+--   reduce production type_expr -> POINT
+
+State 4:
+## Known stack suffix:
+## INT
+## LR(1) items:
+type_expr -> INT . [ SEMICOLON LIST INT FLOAT BOOL_LITERAL ]
+## Transitions:
+## Reductions:
+-- On SEMICOLON LIST INT FLOAT BOOL_LITERAL
+--   reduce production type_expr -> INT
+
+State 5:
+## Known stack suffix:
+## FLOAT
+## LR(1) items:
+type_expr -> FLOAT . [ SEMICOLON LIST INT FLOAT BOOL_LITERAL ]
+## Transitions:
+## Reductions:
+-- On SEMICOLON LIST INT FLOAT BOOL_LITERAL
+--   reduce production type_expr -> FLOAT
+
+State 6:
+## Known stack suffix:
+## COLOR
+## LR(1) items:
+type_expr -> COLOR . [ SEMICOLON LIST INT FLOAT BOOL_LITERAL ]
+## Transitions:
+## Reductions:
+-- On SEMICOLON LIST INT FLOAT BOOL_LITERAL
+--   reduce production type_expr -> COLOR
+
+State 7:
+## Known stack suffix:
+## BOOL
+## LR(1) items:
+type_expr -> BOOL . [ SEMICOLON LIST INT FLOAT BOOL_LITERAL ]
+## Transitions:
+## Reductions:
+-- On SEMICOLON LIST INT FLOAT BOOL_LITERAL
+--   reduce production type_expr -> BOOL
+
+State 8:
+## Known stack suffix:
+## STRING type_expr
+## LR(1) items:
+argument -> STRING type_expr . [ SEMICOLON INT FLOAT BOOL_LITERAL ]
+type_expr -> type_expr . LIST [ SEMICOLON LIST INT FLOAT BOOL_LITERAL ]
+## Transitions:
+-- On LIST shift to state 9
+## Reductions:
+-- On SEMICOLON INT FLOAT BOOL_LITERAL
+--   reduce production argument -> STRING type_expr
+
+State 9:
+## Known stack suffix:
+## type_expr LIST
+## LR(1) items:
+type_expr -> type_expr LIST . [ SEMICOLON LIST INT FLOAT BOOL_LITERAL ]
+## Transitions:
+## Reductions:
+-- On SEMICOLON LIST INT FLOAT BOOL_LITERAL
+--   reduce production type_expr -> type_expr LIST
+
+State 10:
 ## Known stack suffix:
 ## EOF
 ## LR(1) items:
@@ -18,7 +121,26 @@ main -> EOF . [ # ]
 -- On #
 --   reduce production main -> EOF
 
-State 2:
+State 11:
+## Known stack suffix:
+## program
+## LR(1) items:
+main -> program . EOF [ # ]
+## Transitions:
+-- On EOF shift to state 12
+## Reductions:
+
+State 12:
+## Known stack suffix:
+## program EOF
+## LR(1) items:
+main -> program EOF . [ # ]
+## Transitions:
+## Reductions:
+-- On #
+--   reduce production main -> program EOF
+
+State 13:
 ## Known stack suffix:
 ## main
 ## LR(1) items:
@@ -27,4 +149,148 @@ main' -> main . [ # ]
 ## Reductions:
 -- On #
 --   accept main
+
+State 14:
+## Known stack suffix:
+## argument_list
+## LR(1) items:
+program -> argument_list . statement [ EOF ]
+## Transitions:
+-- On INT shift to state 15
+-- On FLOAT shift to state 16
+-- On BOOL_LITERAL shift to state 17
+-- On statement shift to state 18
+-- On expression shift to state 19
+## Reductions:
+
+State 15:
+## Known stack suffix:
+## INT
+## LR(1) items:
+expression -> INT . [ INT FLOAT EOF BOOL_LITERAL ]
+## Transitions:
+## Reductions:
+-- On INT FLOAT EOF BOOL_LITERAL
+--   reduce production expression -> INT
+
+State 16:
+## Known stack suffix:
+## FLOAT
+## LR(1) items:
+expression -> FLOAT . [ INT FLOAT EOF BOOL_LITERAL ]
+## Transitions:
+## Reductions:
+-- On INT FLOAT EOF BOOL_LITERAL
+--   reduce production expression -> FLOAT
+
+State 17:
+## Known stack suffix:
+## BOOL_LITERAL
+## LR(1) items:
+expression -> BOOL_LITERAL . [ INT FLOAT EOF BOOL_LITERAL ]
+## Transitions:
+## Reductions:
+-- On INT FLOAT EOF BOOL_LITERAL
+--   reduce production expression -> BOOL_LITERAL
+
+State 18:
+## Known stack suffix:
+## argument_list statement
+## LR(1) items:
+program -> argument_list statement . [ EOF ]
+## Transitions:
+## Reductions:
+-- On EOF
+--   reduce production program -> argument_list statement
+
+State 19:
+## Known stack suffix:
+## expression
+## LR(1) items:
+expression -> expression . expression [ INT FLOAT BOOL_LITERAL ]
+expression -> expression . expression expression [ INT FLOAT BOOL_LITERAL ]
+statement -> expression . expression [ EOF ]
+## Transitions:
+-- On INT shift to state 15
+-- On FLOAT shift to state 16
+-- On BOOL_LITERAL shift to state 17
+-- On expression shift to state 20
+## Reductions:
+
+State 20:
+## Known stack suffix:
+## expression expression
+## LR(1) items:
+expression -> expression . expression [ INT FLOAT EOF BOOL_LITERAL ]
+expression -> expression expression . [ INT FLOAT BOOL_LITERAL ]
+expression -> expression . expression expression [ INT FLOAT EOF BOOL_LITERAL ]
+expression -> expression expression . expression [ INT FLOAT BOOL_LITERAL ]
+statement -> expression expression . [ EOF ]
+## Transitions:
+-- On INT shift to state 15
+-- On FLOAT shift to state 16
+-- On BOOL_LITERAL shift to state 17
+-- On expression shift to state 21
+## Reductions:
+-- On INT FLOAT BOOL_LITERAL
+--   reduce production expression -> expression expression
+-- On EOF
+--   reduce production statement -> expression expression
+** Conflict on INT FLOAT BOOL_LITERAL
+
+State 21:
+## Known stack suffix:
+## expression expression expression
+## LR(1) items:
+expression -> expression . expression [ INT FLOAT EOF BOOL_LITERAL ]
+expression -> expression expression . [ INT FLOAT EOF BOOL_LITERAL ]
+expression -> expression . expression expression [ INT FLOAT EOF BOOL_LITERAL ]
+expression -> expression expression . expression [ INT FLOAT EOF BOOL_LITERAL ]
+expression -> expression expression expression . [ INT FLOAT EOF BOOL_LITERAL ]
+## Transitions:
+-- On INT shift to state 15
+-- On FLOAT shift to state 16
+-- On BOOL_LITERAL shift to state 17
+-- On expression shift to state 21
+## Reductions:
+-- On INT FLOAT EOF BOOL_LITERAL
+--   reduce production expression -> expression expression
+-- On INT FLOAT EOF BOOL_LITERAL
+--   reduce production expression -> expression expression expression
+** Conflict on INT FLOAT EOF BOOL_LITERAL
+
+State 22:
+## Known stack suffix:
+## argument
+## LR(1) items:
+argument_list -> argument . SEMICOLON argument_list [ INT FLOAT BOOL_LITERAL ]
+argument_list -> argument . [ INT FLOAT BOOL_LITERAL ]
+## Transitions:
+-- On SEMICOLON shift to state 23
+## Reductions:
+-- On INT FLOAT BOOL_LITERAL
+--   reduce production argument_list -> argument
+
+State 23:
+## Known stack suffix:
+## argument SEMICOLON
+## LR(1) items:
+argument_list -> argument SEMICOLON . argument_list [ INT FLOAT BOOL_LITERAL ]
+## Transitions:
+-- On STRING shift to state 1
+-- On argument_list shift to state 24
+-- On argument shift to state 22
+## Reductions:
+-- On INT FLOAT BOOL_LITERAL
+--   reduce production argument_list ->
+
+State 24:
+## Known stack suffix:
+## argument SEMICOLON argument_list
+## LR(1) items:
+argument_list -> argument SEMICOLON argument_list . [ INT FLOAT BOOL_LITERAL ]
+## Transitions:
+## Reductions:
+-- On INT FLOAT BOOL_LITERAL
+--   reduce production argument_list -> argument SEMICOLON argument_list
 

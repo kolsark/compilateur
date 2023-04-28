@@ -1,0 +1,68 @@
+type token =
+    Y
+  | X
+  | USUB
+  | TO
+  | TAIL
+  | SUB
+  | STRING of string
+  | STEP
+  | SIN
+  | SEMICOLON
+  | RED
+  | PRINT
+  | POS
+  | POINT
+  | OR
+  | NOT
+  | NE
+  | MUL
+  | MOD
+  | LT
+  | LIST
+  | LE
+  | INT of int
+  | IN
+  | IF
+  | ID of string
+  | HEAD
+  | GT
+  | GREEN
+  | GE
+  | FROM
+  | FOREACH
+  | FOR
+  | FLOOR
+  | FLOAT_OF_INT
+  | FLOAT of float
+  | EQ
+  | EOF
+  | END
+  | ELSE
+  | DRAW
+  | DOT
+  | DIV
+  | COS
+  | COPY
+  | CONS
+  | COMMA
+  | COLOR
+  | BOOL_LITERAL of bool
+  | BOOL
+  | BLUE
+  | BEGIN
+  | AND
+  | ADD
+val menhir_begin_marker : int
+val xv_unary_operator : Ast.unary_operator
+val xv_type_expr : Ast.type_expr
+val xv_statement : Ast.statement
+val xv_program : Ast.program
+val xv_main : Ast.program
+val xv_field_accessor : Ast.field_accessor
+val xv_expression_list : Ast.expression list
+val xv_expression : Ast.expression
+val xv_binary_operator : Ast.binary_operator
+val xv_argument_list : Ast.argument list
+val xv_argument : Ast.argument
+val menhir_end_marker : int

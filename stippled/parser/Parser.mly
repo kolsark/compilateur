@@ -16,7 +16,7 @@
 %token <string> ID
 %token BOOL POINT LIST
 %token ADD SUB MUL DIV MOD AND OR EQ NE LT GT LE GE
-%token NOT HEAD TAIL FLOOR FLOAT_OF_INT COS SIN 
+%token NOT USUB HEAD TAIL FLOOR FLOAT_OF_INT COS SIN 
 %token COLOR POS X Y BLUE RED GREEN
 %token PRINT COPY IF ELSE FOR FROM TO STEP FOREACH IN DRAW
 %token CONS DOT COMMA SEMICOLON BEGIN END
@@ -28,28 +28,85 @@
 %%
 
 main:
-    | s = argument_list EOF { Program(s, Block([], Annotation.create $loc)) }
+    | s = program EOF { s }
+    | EOF { Program([], Block([], Annotation.create $loc)) }
+
+program:
+    | a = argument_list s = statement { Program(a, s) }
 
 argument_list:
-    | a1 = argument SEMICOLON a2 = argument_list { a1 :: a2 }
+    | a1 = argument SEMICOLON a2 = argument_list { a1 :: a2 } (* not empty -> pop the first *)
+    | a = argument { [a] }
     | { [] } (* empty statements list *)
 
 argument:
-
-statements:
-    | { [] } (* empty statements list *)
-    | s1 = statement SEMICOLON s2 = statements { s1 :: s2 } (* not empty -> pop the first *)
+    | a1 = STRING a2 = type_expr { Argument(a1, a2, Annotation.create $loc) }
   
 statement:
     | e1 = expression e2 = expression { Assignment(e1, e2, Annotation.create $loc) }
-(*  | declaration { Prog.Statement.Declaration(\$1) } 
-    | control_structure { Prog.Statement.ControlStructure(\$1) }*)
 
 expression:
-    | e = constant_i { Constant_i(e, Annotation.create $loc) }
+    | i = INT { Constant_i(i, Annotation.create $loc) }
+    | f = FLOAT { Constant_f(f, Annotation.create $loc) }
+    | b = BOOL_LITERAL { Constant_b(b, Annotation.create $loc) }
+    | e1 = expression e2 = expression { Pos(e1, e2, Annotation.create $loc) }
+    | e1 = expression e2 = expression e3 = expression { Color(e1, e2, e3, Annotation.create $loc) }
+    | e1 = expression e2 = expression { Point(e1, e2, Annotation.create $loc) }
+    | e1 = STRING { Variable(e1, Annotation.create $loc) }
+    | e1 = binary_operator e2 = expression e3 = expression { Binary_operator(e1, e2, e3, Annotation.create $loc) }
+    | e1 = unary_operator e2 = expression { Unary_operator(e1, e2, Annotation.create $loc) }
+    | f = field_accessor e = expression { Field_accessor(f, e, Annotation.create $loc) }
+    | e = expression_list { List(e, Annotation.create $loc) }
+    | e1 = expression e2 = expression { Cons(e1, e2, Annotation.create $loc) }
 
-constant_i:
-  | i = INT { i }
+expression_list:
+    | e1 = expression COMMA e2 = expression_list { e1 :: e2 } (* not empty -> pop the first *)
+    | e = expression { [e] }
+    | { [] } (* empty expression list *)
+
+field_accessor:
+  | COLOR { Color_accessor }
+  | POS { Position_accessor }
+  | X { X_accessor }
+  | Y { Y_accessor }
+  | BLUE { Blue_accessor }
+  | RED { Red_accessor }
+  | GREEN { Green_accessor }
+
+unary_operator:
+  | SUB { USub }
+  | NOT { Not }
+  | HEAD { Head }
+  | TAIL { Tail }
+  | FLOOR { Floor }
+  | FLOAT_OF_INT { Float_of_int }
+  | COS { Cos }
+  | SIN { Sin }
+
+binary_operator:
+    | ADD { Add }
+    | SUB { Sub }
+    | MUL { Mul }
+    | DIV { Div }
+    | MOD { Mod }
+    | AND { And }
+    | OR { Or }
+    | EQ { Eq }
+    | NE { Ne }
+    | LT { Lt }
+    | GT { Gt }
+    | LE { Le }
+    | GE { Ge }
+
+type_expr:
+    | INT { Type_int }
+    | FLOAT { Type_float }
+    | BOOL { Type_bool }
+    | POS { Type_pos }
+    | COLOR { Type_color }
+    | POINT { Type_point }
+    | e = type_expr LIST { Type_list(e) }
+
 
 
 

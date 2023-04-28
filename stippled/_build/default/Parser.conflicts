@@ -1,0 +1,66 @@
+
+** Conflict (shift/reduce/reduce) in state 21.
+** Tokens involved: INT FLOAT EOF BOOL_LITERAL
+** The following explanations concentrate on token INT.
+** This state is reached from main after reading:
+
+argument_list expression expression expression
+
+** The derivations that appear below have the following common factor:
+** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
+
+main 
+program EOF 
+argument_list statement 
+              (?)
+
+** In state 21, looking ahead at INT, shifting is permitted
+** because of the following sub-derivation:
+
+expression expression 
+           expression expression expression 
+                                 . INT 
+
+** In state 21, looking ahead at INT, reducing production
+** expression -> expression expression
+** is permitted because of the following sub-derivation:
+
+expression expression 
+           expression expression // lookahead token appears because expression can begin with INT
+           expression expression . 
+
+** In state 21, looking ahead at INT, reducing production
+** expression -> expression expression expression
+** is permitted because of the following sub-derivation:
+
+expression expression // lookahead token appears because expression can begin with INT
+expression expression expression . 
+
+** Conflict (shift/reduce) in state 20.
+** Tokens involved: INT FLOAT BOOL_LITERAL
+** The following explanations concentrate on token INT.
+** This state is reached from main after reading:
+
+argument_list expression expression
+
+** The derivations that appear below have the following common factor:
+** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
+
+main 
+program EOF 
+argument_list statement 
+              (?)
+
+** In state 20, looking ahead at INT, shifting is permitted
+** because of the following sub-derivation:
+
+expression expression 
+           expression expression 
+                      . INT 
+
+** In state 20, looking ahead at INT, reducing production
+** expression -> expression expression
+** is permitted because of the following sub-derivation:
+
+expression expression // lookahead token appears because expression can begin with INT
+expression expression . 
