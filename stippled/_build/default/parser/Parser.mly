@@ -19,7 +19,13 @@
 %token NOT USUB HEAD TAIL FLOOR FLOAT_OF_INT COS SIN 
 %token COLOR POS X Y BLUE RED GREEN
 %token PRINT COPY IF ELSE FOR FROM TO STEP FOREACH IN DRAW
-%token CONS DOT COMMA SEMICOLON BEGIN END
+%token CONS DOT COMMA SEMICOLON BEGIN END LPAR RPAR LCUR RCUR LSQ RSQ
+
+%left AND OR
+%left EQ NE LT GT LE GE
+%left ADD SUB 
+%left MUL DIV MOD
+%nonassoc ELSE NOT
 
 
 
@@ -41,27 +47,29 @@ argument_list:
 
 argument:
     | a1 = STRING a2 = type_expr { Argument(a1, a2, Annotation.create $loc) }
-  
+ 
 statement:
-    | e1 = expression e2 = expression { Assignment(e1, e2, Annotation.create $loc) }
+    | COPY e1 = expression e2 = expression SEMICOLON { Assignment(e1, e2, Annotation.create $loc) }
+    | e = ID t = type_expr SEMICOLON { Variable_declaration(e, t, Annotation.create $loc)}
+
 
 expression:
     | i = INT { Constant_i(i, Annotation.create $loc) }
     | f = FLOAT { Constant_f(f, Annotation.create $loc) }
     | b = BOOL_LITERAL { Constant_b(b, Annotation.create $loc) }
-    | e1 = expression e2 = expression { Pos(e1, e2, Annotation.create $loc) }
-    | e1 = expression e2 = expression e3 = expression { Color(e1, e2, e3, Annotation.create $loc) }
-    | e1 = expression e2 = expression { Point(e1, e2, Annotation.create $loc) }
-    | e1 = STRING { Variable(e1, Annotation.create $loc) }
-    | e1 = binary_operator e2 = expression e3 = expression { Binary_operator(e1, e2, e3, Annotation.create $loc) }
+    | POS LPAR e1 = expression COMMA e2 = expression RPAR { Pos(e1, e2, Annotation.create $loc) }
+    | COLOR LPAR e1 = expression COMMA e2 = expression COMMA e3 = expression RPAR { Color(e1, e2, e3, Annotation.create $loc) }
+    | POINT LPAR e1 = expression COMMA e2 = expression RPAR { Point(e1, e2, Annotation.create $loc) }
+    | e1 = ID { Variable(e1, Annotation.create $loc) }
+    | e1 = expression e2 = binary_operator e3 = expression { Binary_operator(e2, e1, e3, Annotation.create $loc) }
     | e1 = unary_operator e2 = expression { Unary_operator(e1, e2, Annotation.create $loc) }
-    | f = field_accessor e = expression { Field_accessor(f, e, Annotation.create $loc) }
-    | e = expression_list { List(e, Annotation.create $loc) }
-    | e1 = expression e2 = expression { Cons(e1, e2, Annotation.create $loc) }
-
+    | e = expression DOT f = field_accessor { Field_accessor(f, e, Annotation.create $loc) }
+    | LCUR e = expression_list RCUR { List(e, Annotation.create $loc) }
+    | e1 = expression CONS e2 = expression { Cons(e1, e2, Annotation.create $loc) }
+    
 expression_list:
-    | e1 = expression COMMA e2 = expression_list { e1 :: e2 } (* not empty -> pop the first *)
     | e = expression { [e] }
+    | e1 = expression COMMA e2 = expression_list { e1 :: e2 } (* not empty -> pop the first *)    
     | { [] } (* empty expression list *)
 
 field_accessor:

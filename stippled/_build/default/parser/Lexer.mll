@@ -63,6 +63,12 @@ rule token = parse
     |"."            {DOT}
     |","            {COMMA}
     |";"            {SEMICOLON}
+    |"("            {LPAR}
+    |")"            {RPAR}        
+    |"["            {LCUR}
+    |"]"            {RCUR}
+    |"{"            {LSQ}
+    |"}"            {RSQ}
 
     | "\"" ([^ '\"']* as s) "\""  { STRING(s) }
     | (digit)* "." (digit)* as s {FLOAT(try float_of_string s with Failure _ -> raise (Error(s)) )}

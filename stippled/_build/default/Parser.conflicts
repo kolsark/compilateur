@@ -1,10 +1,10 @@
 
-** Conflict (shift/reduce/reduce) in state 21.
-** Tokens involved: INT FLOAT EOF BOOL_LITERAL
-** The following explanations concentrate on token INT.
+** Conflict (reduce/reduce) in state 86.
+** Tokens involved: TAIL SUB SIN POS POINT NOT LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL
+** The following explanations concentrate on token TAIL.
 ** This state is reached from main after reading:
 
-argument_list expression expression expression
+argument_list COPY expression SUB
 
 ** The derivations that appear below have the following common factor:
 ** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
@@ -14,34 +14,28 @@ program EOF
 argument_list statement 
               (?)
 
-** In state 21, looking ahead at INT, shifting is permitted
-** because of the following sub-derivation:
-
-expression expression 
-           expression expression expression 
-                                 . INT 
-
-** In state 21, looking ahead at INT, reducing production
-** expression -> expression expression
+** In state 86, looking ahead at TAIL, reducing production
+** binary_operator -> SUB
 ** is permitted because of the following sub-derivation:
 
-expression expression 
-           expression expression // lookahead token appears because expression can begin with INT
-           expression expression . 
+COPY expression expression SEMICOLON 
+     expression binary_operator expression // lookahead token appears because expression can begin with TAIL
+                SUB . 
 
-** In state 21, looking ahead at INT, reducing production
-** expression -> expression expression expression
+** In state 86, looking ahead at TAIL, reducing production
+** unary_operator -> SUB
 ** is permitted because of the following sub-derivation:
 
-expression expression // lookahead token appears because expression can begin with INT
-expression expression expression . 
+COPY expression expression SEMICOLON 
+                unary_operator expression // lookahead token appears because expression can begin with TAIL
+                SUB . 
 
-** Conflict (shift/reduce) in state 20.
-** Tokens involved: INT FLOAT BOOL_LITERAL
-** The following explanations concentrate on token INT.
+** Conflict (shift/reduce) in state 65.
+** Tokens involved: SUB OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS AND ADD
+** The following explanations concentrate on token SUB.
 ** This state is reached from main after reading:
 
-argument_list expression expression
+argument_list COPY expression binary_operator expression
 
 ** The derivations that appear below have the following common factor:
 ** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
@@ -51,16 +45,77 @@ program EOF
 argument_list statement 
               (?)
 
-** In state 20, looking ahead at INT, shifting is permitted
+** In state 65, looking ahead at SUB, shifting is permitted
 ** because of the following sub-derivation:
 
-expression expression 
-           expression expression 
-                      . INT 
+COPY expression expression SEMICOLON 
+     expression binary_operator expression 
+                                expression binary_operator expression 
+                                           . SUB 
 
-** In state 20, looking ahead at INT, reducing production
-** expression -> expression expression
+** In state 65, looking ahead at SUB, reducing production
+** expression -> expression binary_operator expression
 ** is permitted because of the following sub-derivation:
 
-expression expression // lookahead token appears because expression can begin with INT
-expression expression . 
+COPY expression expression SEMICOLON // lookahead token appears because expression can begin with SUB
+     expression binary_operator expression . 
+
+** Conflict (shift/reduce) in state 61.
+** Tokens involved: SUB OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS AND ADD
+** The following explanations concentrate on token SUB.
+** This state is reached from main after reading:
+
+argument_list COPY expression CONS expression
+
+** The derivations that appear below have the following common factor:
+** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
+
+main 
+program EOF 
+argument_list statement 
+              (?)
+
+** In state 61, looking ahead at SUB, shifting is permitted
+** because of the following sub-derivation:
+
+COPY expression expression SEMICOLON 
+     expression CONS expression 
+                     expression binary_operator expression 
+                                . SUB 
+
+** In state 61, looking ahead at SUB, reducing production
+** expression -> expression CONS expression
+** is permitted because of the following sub-derivation:
+
+COPY expression expression SEMICOLON // lookahead token appears because expression can begin with SUB
+     expression CONS expression . 
+
+** Conflict (shift/reduce) in state 39.
+** Tokens involved: SUB OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS AND ADD
+** The following explanations concentrate on token SUB.
+** This state is reached from main after reading:
+
+argument_list COPY unary_operator expression
+
+** The derivations that appear below have the following common factor:
+** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
+
+main 
+program EOF 
+argument_list statement 
+              (?)
+
+** In state 39, looking ahead at SUB, shifting is permitted
+** because of the following sub-derivation:
+
+COPY expression expression SEMICOLON 
+     unary_operator expression 
+                    expression binary_operator expression 
+                               . SUB 
+
+** In state 39, looking ahead at SUB, reducing production
+** expression -> unary_operator expression
+** is permitted because of the following sub-derivation:
+
+COPY expression expression SEMICOLON // lookahead token appears because expression can begin with SUB
+     unary_operator expression . 

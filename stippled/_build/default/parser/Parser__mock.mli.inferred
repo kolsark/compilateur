@@ -9,7 +9,10 @@ type token =
   | STEP
   | SIN
   | SEMICOLON
+  | RSQ
+  | RPAR
   | RED
+  | RCUR
   | PRINT
   | POS
   | POINT
@@ -19,8 +22,11 @@ type token =
   | MUL
   | MOD
   | LT
+  | LSQ
+  | LPAR
   | LIST
   | LE
+  | LCUR
   | INT of int
   | IN
   | IF
