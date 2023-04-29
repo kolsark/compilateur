@@ -148,6 +148,7 @@ module MenhirInterpreter : sig
   type _ nonterminal = 
     | N_unary_operator : (Ast.unary_operator) nonterminal
     | N_type_expr : (Ast.type_expr) nonterminal
+    | N_statement_list : (Ast.statement list) nonterminal
     | N_statement : (Ast.statement) nonterminal
     | N_program : (Ast.program) nonterminal
     | N_main : (Ast.program) nonterminal

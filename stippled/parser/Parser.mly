@@ -34,11 +34,12 @@
 %%
 
 main:
-    | s = program EOF { s }
+    | p = program EOF { p }
     | EOF { Program([], Block([], Annotation.create $loc)) }
 
 program:
-    | a = argument_list s = statement { Program(a, s) }
+    | LT a = argument_list GT s = statement_list { Program(a, Block(s, Annotation.create $loc)) }
+    | s = statement_list { Program([], Block(s, Annotation.create $loc)) }(* A verifier *)
 
 argument_list:
     | a1 = argument SEMICOLON a2 = argument_list { a1 :: a2 } (* not empty -> pop the first *)
@@ -51,7 +52,19 @@ argument:
 statement:
     | COPY e1 = expression e2 = expression SEMICOLON { Assignment(e1, e2, Annotation.create $loc) }
     | e = ID t = type_expr SEMICOLON { Variable_declaration(e, t, Annotation.create $loc)}
+    | BEGIN s = statement_list END { Block(s, Annotation.create $loc) }
+    | IF LPAR e = expression RPAR s1 = statement SEMICOLON { IfThenElse(e, s1, Nop, Annotation.create $loc) }
+    | IF LPAR e = expression RPAR s1 = statement ELSE s2 = statement SEMICOLON { IfThenElse(e, s1, s2, Annotation.create $loc) }
+    | FOR n = ID FROM e1 = expression TO e2 = expression STEP e3 = expression s = statement_list { For(n, e1, e2, e3, Block(s, Annotation.create $loc), Annotation.create $loc) }
+    | FOREACH n = ID IN e = expression s = statement_list { Foreach(n ,e , Block(s, Annotation.create $loc), Annotation.create $loc) }
+    | DRAW LPAR e = expression RPAR { Draw(e, Annotation.create $loc) }
+    | PRINT LPAR e = expression RPAR { Print(e, Annotation.create $loc) }
+    | { Nop } (* A verifier *)
 
+statement_list:
+    | s1 = statement SEMICOLON s2 = statement_list { s1 :: s2 } (* not empty -> pop the first *)
+    | s = statement { [s] }
+    | { [] } (* empty statements list *)
 
 expression:
     | i = INT { Constant_i(i, Annotation.create $loc) }

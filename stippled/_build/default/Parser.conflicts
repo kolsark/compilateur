@@ -1,20 +1,50 @@
 
-** Conflict (reduce/reduce) in state 86.
-** Tokens involved: TAIL SUB SIN POS POINT NOT LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL
-** The following explanations concentrate on token TAIL.
+** Conflict (shift/reduce) in state 114.
+** Token involved: SEMICOLON
 ** This state is reached from main after reading:
 
-argument_list COPY expression SUB
+FOREACH ID IN expression statement
 
 ** The derivations that appear below have the following common factor:
 ** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
 
 main 
 program EOF 
-argument_list statement 
-              (?)
+statement_list 
+(?)
 
-** In state 86, looking ahead at TAIL, reducing production
+** In state 114, looking ahead at SEMICOLON, shifting is permitted
+** because of the following sub-derivation:
+
+statement SEMICOLON statement_list 
+FOREACH ID IN expression statement_list 
+                         statement . SEMICOLON statement_list 
+
+** In state 114, looking ahead at SEMICOLON, reducing production
+** statement_list -> statement
+** is permitted because of the following sub-derivation:
+
+statement SEMICOLON statement_list // lookahead token appears
+FOREACH ID IN expression statement_list // lookahead token is inherited
+                         statement . 
+
+** Conflict (reduce/reduce) in state 108.
+** Tokens involved: TAIL SUB SIN POS POINT NOT LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL
+** The following explanations concentrate on token TAIL.
+** This state is reached from main after reading:
+
+COPY expression SUB
+
+** The derivations that appear below have the following common factor:
+** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
+
+main 
+program EOF 
+statement_list 
+statement SEMICOLON statement_list 
+(?)
+
+** In state 108, looking ahead at TAIL, reducing production
 ** binary_operator -> SUB
 ** is permitted because of the following sub-derivation:
 
@@ -22,7 +52,7 @@ COPY expression expression SEMICOLON
      expression binary_operator expression // lookahead token appears because expression can begin with TAIL
                 SUB . 
 
-** In state 86, looking ahead at TAIL, reducing production
+** In state 108, looking ahead at TAIL, reducing production
 ** unary_operator -> SUB
 ** is permitted because of the following sub-derivation:
 
@@ -30,22 +60,23 @@ COPY expression expression SEMICOLON
                 unary_operator expression // lookahead token appears because expression can begin with TAIL
                 SUB . 
 
-** Conflict (shift/reduce) in state 65.
+** Conflict (shift/reduce) in state 49.
 ** Tokens involved: SUB OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS AND ADD
 ** The following explanations concentrate on token SUB.
 ** This state is reached from main after reading:
 
-argument_list COPY expression binary_operator expression
+COPY expression binary_operator expression
 
 ** The derivations that appear below have the following common factor:
 ** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
 
 main 
 program EOF 
-argument_list statement 
-              (?)
+statement_list 
+statement SEMICOLON statement_list 
+(?)
 
-** In state 65, looking ahead at SUB, shifting is permitted
+** In state 49, looking ahead at SUB, shifting is permitted
 ** because of the following sub-derivation:
 
 COPY expression expression SEMICOLON 
@@ -53,29 +84,30 @@ COPY expression expression SEMICOLON
                                 expression binary_operator expression 
                                            . SUB 
 
-** In state 65, looking ahead at SUB, reducing production
+** In state 49, looking ahead at SUB, reducing production
 ** expression -> expression binary_operator expression
 ** is permitted because of the following sub-derivation:
 
 COPY expression expression SEMICOLON // lookahead token appears because expression can begin with SUB
      expression binary_operator expression . 
 
-** Conflict (shift/reduce) in state 61.
+** Conflict (shift/reduce) in state 45.
 ** Tokens involved: SUB OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS AND ADD
 ** The following explanations concentrate on token SUB.
 ** This state is reached from main after reading:
 
-argument_list COPY expression CONS expression
+COPY expression CONS expression
 
 ** The derivations that appear below have the following common factor:
 ** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
 
 main 
 program EOF 
-argument_list statement 
-              (?)
+statement_list 
+statement SEMICOLON statement_list 
+(?)
 
-** In state 61, looking ahead at SUB, shifting is permitted
+** In state 45, looking ahead at SUB, shifting is permitted
 ** because of the following sub-derivation:
 
 COPY expression expression SEMICOLON 
@@ -83,29 +115,30 @@ COPY expression expression SEMICOLON
                      expression binary_operator expression 
                                 . SUB 
 
-** In state 61, looking ahead at SUB, reducing production
+** In state 45, looking ahead at SUB, reducing production
 ** expression -> expression CONS expression
 ** is permitted because of the following sub-derivation:
 
 COPY expression expression SEMICOLON // lookahead token appears because expression can begin with SUB
      expression CONS expression . 
 
-** Conflict (shift/reduce) in state 39.
+** Conflict (shift/reduce) in state 23.
 ** Tokens involved: SUB OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS AND ADD
 ** The following explanations concentrate on token SUB.
 ** This state is reached from main after reading:
 
-argument_list COPY unary_operator expression
+COPY unary_operator expression
 
 ** The derivations that appear below have the following common factor:
 ** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
 
 main 
 program EOF 
-argument_list statement 
-              (?)
+statement_list 
+statement SEMICOLON statement_list 
+(?)
 
-** In state 39, looking ahead at SUB, shifting is permitted
+** In state 23, looking ahead at SUB, shifting is permitted
 ** because of the following sub-derivation:
 
 COPY expression expression SEMICOLON 
@@ -113,9 +146,34 @@ COPY expression expression SEMICOLON
                     expression binary_operator expression 
                                . SUB 
 
-** In state 39, looking ahead at SUB, reducing production
+** In state 23, looking ahead at SUB, reducing production
 ** expression -> unary_operator expression
 ** is permitted because of the following sub-derivation:
 
 COPY expression expression SEMICOLON // lookahead token appears because expression can begin with SUB
      unary_operator expression . 
+
+** Conflict (shift/reduce) in state 0.
+** Token involved: EOF
+** This state is reached from main after reading:
+
+
+
+** The derivations that appear below have the following common factor:
+** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
+
+main 
+(?)
+
+** In state 0, looking ahead at EOF, shifting is permitted
+** because of the following sub-derivation:
+
+. EOF 
+
+** In state 0, looking ahead at EOF, reducing production
+** statement_list ->
+** is permitted because of the following sub-derivation:
+
+program EOF // lookahead token appears
+statement_list // lookahead token is inherited
+. 
