@@ -15,7 +15,7 @@ rule token = parse
     |"And"          {AND}
     |"Begin"        {BEGIN}
     |"Blue"         {BLUE}
-    |"Bool"         {BOOL} 
+    |"Bool"         {BOOL_TYP} 
     |"true"         {BOOL_LITERAL(true)}
     |"false"        {BOOL_LITERAL(false)}
     |"Color"        {COLOR}
@@ -24,7 +24,7 @@ rule token = parse
     |"Draw"         {DRAW}
     |"Else"         {ELSE}
     |"End"          {END}
-    (* |"Float"        {FLOAT} *)
+    |"Float"        {FLOAT_TYP}
     |"Float_of_int" {FLOAT_OF_INT}
     |"Floor"        {FLOOR}
     |"For"          {FOR}
@@ -34,7 +34,7 @@ rule token = parse
     |"Head"         {HEAD}
     |"If"           {IF}
     |"In"           {IN}
-    (* |"Int"          {INT} *)
+    |"Int"          {INT_TYP}
     |"List"         {LIST}
     |"Not"          {NOT}
     |"Or"           {OR}
