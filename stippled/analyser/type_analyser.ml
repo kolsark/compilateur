@@ -28,3 +28,15 @@ let type_analyser report program =
   Error_report.add_warning report
     ("sample_warning", (Lexing.dummy_pos, Lexing.dummy_pos));
   match program with _ -> ()
+
+
+  let rec type_expression env report expr =
+    match expr with
+    | Ast.Integer _ -> Ast.Type_int
+    | Ast.Float _ -> Ast.Type_float
+    | Ast.Boolean _ -> Ast.Type_bool
+    | Ast.Position _ -> Ast.Type_pos
+    | Ast.Color _ -> Ast.Type_color
+    | Ast.Point _ -> Ast.Type_point
+
+
