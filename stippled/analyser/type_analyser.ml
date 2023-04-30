@@ -30,13 +30,6 @@ let type_analyser report program =
   match program with _ -> ()
 
 
-  let rec type_expression environment report expr =
-    match expr with
-    | Ast.Integer _ -> Ast.Type_int
-    | Ast.Float _ -> Ast.Type_float
-    | Ast.Boolean _ -> Ast.Type_bool
-    | Ast.Position _ -> Ast.Type_pos
-    | Ast.Color _ -> Ast.Type_color
-    | Ast.Point _ -> Ast.Type_point
+
 
 
