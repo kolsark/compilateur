@@ -174,4 +174,4 @@ type_expr:
     | POS { Pos }
     | COLOR { Color }
     | POINT { Point }
-    | e = type_expr LIST { Type_list(e) } (* A verifier *)
+    | t = type_expr { List(t) } (* A verifier *)
