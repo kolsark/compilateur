@@ -174,4 +174,9 @@ type_expr:
     | POS { Pos }
     | COLOR { Color }
     | POINT { Point }
-    | t = type_expr { List(t) } (* A verifier *)
+    | LIST { type_list } (* A verifier *)
+
+type_list:
+    | t1 = type_expr SEMICOLON t2 = type_list { t1 :: t2 } (* not empty -> pop the first *)
+    | t = type_expr { [t] }
+    | { [] } (* empty statements list *)
