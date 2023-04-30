@@ -168,8 +168,8 @@ binary_operator:
     | GE { Ge }
 
 type_expr:
-    | INT { Int }
-    | FLOAT { Float }
+    | INT_TYP { Int }
+    | FLOAT_TYP { Float }
     | BOOL_TYP { Bool }
     | POS { Pos }
     | COLOR { Color }
