@@ -69,6 +69,7 @@
 %token RCUR 
 %token LSQ 
 %token RSQ
+%token PI
 
 %nonassoc ELSE
 %left AND OR
