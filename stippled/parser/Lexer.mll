@@ -16,8 +16,8 @@ rule token = parse
     |"Begin"        {BEGIN}
     |"Blue"         {BLUE}
     |"Bool"         {BOOL_TYP} 
-    |"true"         {BOOL_LITERAL(true)}
-    |"false"        {BOOL_LITERAL(false)}
+    |"True"         {BOOL_LITERAL(true)}
+    |"False"        {BOOL_LITERAL(false)}
     |"Color"        {COLOR}
     |"Copy"         {COPY}
     |"Cos"          {COS}
@@ -48,6 +48,7 @@ rule token = parse
     |"To"           {TO}
     |"X"            {X}
     |"Y"            {Y}
+    |"Pi"           {PI}
     |"+"            {ADD}
     |"-"            {SUB}
     |"*"            {MUL}
@@ -67,8 +68,8 @@ rule token = parse
     |")"            {RPAR}        
     |"["            {LCUR}
     |"]"            {RCUR}
-    |"{"            {LSQ}
-    |"}"            {RSQ}
+    (* |"{"            {LSQ}
+    |"}"            {RSQ} *)
 
     | "\"" ([^ '\"']* as s) "\""  { STRING(s) }
     | (digit)* "." (digit)* as s {FLOAT(try float_of_string s with Failure _ -> raise (Error(s)) )}

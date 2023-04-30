@@ -1,7 +1,6 @@
 type token =
     Y
   | X
-  | USUB
   | TO
   | TAIL
   | SUB
@@ -9,24 +8,24 @@ type token =
   | STEP
   | SIN
   | SEMICOLON
-  | RSQ
   | RPAR
   | RED
   | RCUR
   | PRINT
   | POS
   | POINT
+  | PI
   | OR
   | NOT
   | NE
   | MUL
   | MOD
   | LT
-  | LSQ
   | LPAR
   | LIST
   | LE
   | LCUR
+  | INT_TYP
   | INT of int
   | IN
   | IF
@@ -39,6 +38,7 @@ type token =
   | FOREACH
   | FOR
   | FLOOR
+  | FLOAT_TYP
   | FLOAT_OF_INT
   | FLOAT of float
   | EQ
@@ -53,8 +53,8 @@ type token =
   | CONS
   | COMMA
   | COLOR
+  | BOOL_TYP
   | BOOL_LITERAL of bool
-  | BOOL
   | BLUE
   | BEGIN
   | AND

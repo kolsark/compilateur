@@ -4,7 +4,6 @@
 type token = 
   | Y
   | X
-  | USUB
   | TO
   | TAIL
   | SUB
@@ -12,24 +11,24 @@ type token =
   | STEP
   | SIN
   | SEMICOLON
-  | RSQ
   | RPAR
   | RED
   | RCUR
   | PRINT
   | POS
   | POINT
+  | PI
   | OR
   | NOT
   | NE
   | MUL
   | MOD
   | LT
-  | LSQ
   | LPAR
   | LIST
   | LE
   | LCUR
+  | INT_TYP
   | INT of (int)
   | IN
   | IF
@@ -42,6 +41,7 @@ type token =
   | FOREACH
   | FOR
   | FLOOR
+  | FLOAT_TYP
   | FLOAT_OF_INT
   | FLOAT of (float)
   | EQ
@@ -56,8 +56,8 @@ type token =
   | CONS
   | COMMA
   | COLOR
+  | BOOL_TYP
   | BOOL_LITERAL of (bool)
-  | BOOL
   | BLUE
   | BEGIN
   | AND
@@ -84,7 +84,6 @@ module MenhirInterpreter : sig
     | T_error : unit terminal
     | T_Y : unit terminal
     | T_X : unit terminal
-    | T_USUB : unit terminal
     | T_TO : unit terminal
     | T_TAIL : unit terminal
     | T_SUB : unit terminal
@@ -92,24 +91,24 @@ module MenhirInterpreter : sig
     | T_STEP : unit terminal
     | T_SIN : unit terminal
     | T_SEMICOLON : unit terminal
-    | T_RSQ : unit terminal
     | T_RPAR : unit terminal
     | T_RED : unit terminal
     | T_RCUR : unit terminal
     | T_PRINT : unit terminal
     | T_POS : unit terminal
     | T_POINT : unit terminal
+    | T_PI : unit terminal
     | T_OR : unit terminal
     | T_NOT : unit terminal
     | T_NE : unit terminal
     | T_MUL : unit terminal
     | T_MOD : unit terminal
     | T_LT : unit terminal
-    | T_LSQ : unit terminal
     | T_LPAR : unit terminal
     | T_LIST : unit terminal
     | T_LE : unit terminal
     | T_LCUR : unit terminal
+    | T_INT_TYP : unit terminal
     | T_INT : (int) terminal
     | T_IN : unit terminal
     | T_IF : unit terminal
@@ -122,6 +121,7 @@ module MenhirInterpreter : sig
     | T_FOREACH : unit terminal
     | T_FOR : unit terminal
     | T_FLOOR : unit terminal
+    | T_FLOAT_TYP : unit terminal
     | T_FLOAT_OF_INT : unit terminal
     | T_FLOAT : (float) terminal
     | T_EQ : unit terminal
@@ -136,8 +136,8 @@ module MenhirInterpreter : sig
     | T_CONS : unit terminal
     | T_COMMA : unit terminal
     | T_COLOR : unit terminal
+    | T_BOOL_TYP : unit terminal
     | T_BOOL_LITERAL : (bool) terminal
-    | T_BOOL : unit terminal
     | T_BLUE : unit terminal
     | T_BEGIN : unit terminal
     | T_AND : unit terminal

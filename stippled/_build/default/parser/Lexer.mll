@@ -15,16 +15,16 @@ rule token = parse
     |"And"          {AND}
     |"Begin"        {BEGIN}
     |"Blue"         {BLUE}
-    |"Bool"         {BOOL} 
-    |"true"         {BOOL_LITERAL(true)}
-    |"false"        {BOOL_LITERAL(false)}
+    |"Bool"         {BOOL_TYP} 
+    |"True"         {BOOL_LITERAL(true)}
+    |"False"        {BOOL_LITERAL(false)}
     |"Color"        {COLOR}
     |"Copy"         {COPY}
     |"Cos"          {COS}
     |"Draw"         {DRAW}
     |"Else"         {ELSE}
     |"End"          {END}
-    (* |"Float"        {FLOAT} *)
+    |"Float"        {FLOAT_TYP}
     |"Float_of_int" {FLOAT_OF_INT}
     |"Floor"        {FLOOR}
     |"For"          {FOR}
@@ -34,7 +34,7 @@ rule token = parse
     |"Head"         {HEAD}
     |"If"           {IF}
     |"In"           {IN}
-    (* |"Int"          {INT} *)
+    |"Int"          {INT_TYP}
     |"List"         {LIST}
     |"Not"          {NOT}
     |"Or"           {OR}
@@ -48,6 +48,7 @@ rule token = parse
     |"To"           {TO}
     |"X"            {X}
     |"Y"            {Y}
+    |"Pi"           {PI}
     |"+"            {ADD}
     |"-"            {SUB}
     |"*"            {MUL}
@@ -67,8 +68,8 @@ rule token = parse
     |")"            {RPAR}        
     |"["            {LCUR}
     |"]"            {RCUR}
-    |"{"            {LSQ}
-    |"}"            {RSQ}
+    (* |"{"            {LSQ}
+    |"}"            {RSQ} *)
 
     | "\"" ([^ '\"']* as s) "\""  { STRING(s) }
     | (digit)* "." (digit)* as s {FLOAT(try float_of_string s with Failure _ -> raise (Error(s)) )}

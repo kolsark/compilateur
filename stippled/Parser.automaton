@@ -5,22 +5,28 @@ State 0:
 main' -> . main [ # ]
 ## Transitions:
 -- On PRINT shift to state 1
--- On LT shift to state 71
--- On IF shift to state 83
--- On ID shift to state 87
--- On FOREACH shift to state 90
--- On FOR shift to state 94
--- On EOF shift to state 128
--- On DRAW shift to state 102
--- On COPY shift to state 106
--- On BEGIN shift to state 111
--- On statement_list shift to state 129
--- On statement shift to state 114
--- On program shift to state 130
--- On main shift to state 132
+-- On POS shift to state 75
+-- On POINT shift to state 76
+-- On LT shift to state 77
+-- On LIST shift to state 79
+-- On INT_TYP shift to state 81
+-- On IF shift to state 90
+-- On FOREACH shift to state 94
+-- On FOR shift to state 98
+-- On FLOAT_TYP shift to state 82
+-- On EOF shift to state 135
+-- On DRAW shift to state 106
+-- On COPY shift to state 110
+-- On COLOR shift to state 83
+-- On BOOL_TYP shift to state 84
+-- On BEGIN shift to state 116
+-- On type_expr shift to state 117
+-- On statement shift to state 136
+-- On program shift to state 137
+-- On main shift to state 139
 ## Reductions:
 -- On EOF
---   reduce production statement_list ->
+--   reduce production statement ->
 ** Conflict on EOF
 
 State 1:
@@ -43,56 +49,58 @@ statement -> PRINT LPAR . expression RPAR [ SEMICOLON EOF END ELSE ]
 -- On SIN shift to state 5
 -- On POS shift to state 6
 -- On POINT shift to state 8
--- On NOT shift to state 10
--- On LCUR shift to state 11
--- On INT shift to state 12
--- On ID shift to state 13
--- On HEAD shift to state 14
--- On FLOOR shift to state 15
--- On FLOAT_OF_INT shift to state 16
--- On FLOAT shift to state 17
--- On COS shift to state 18
--- On COLOR shift to state 19
--- On BOOL_LITERAL shift to state 21
--- On unary_operator shift to state 22
--- On expression shift to state 69
+-- On PI shift to state 10
+-- On NOT shift to state 11
+-- On LPAR shift to state 12
+-- On LCUR shift to state 13
+-- On INT shift to state 14
+-- On ID shift to state 15
+-- On HEAD shift to state 16
+-- On FLOOR shift to state 17
+-- On FLOAT_OF_INT shift to state 18
+-- On FLOAT shift to state 19
+-- On COS shift to state 20
+-- On COLOR shift to state 21
+-- On BOOL_LITERAL shift to state 23
+-- On unary_operator shift to state 24
+-- On expression shift to state 73
 ## Reductions:
 
 State 3:
 ## Known stack suffix:
 ## TAIL
 ## LR(1) items:
-unary_operator -> TAIL . [ TAIL SUB SIN POS POINT NOT LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL ]
+unary_operator -> TAIL . [ TAIL SUB SIN POS POINT PI NOT LPAR LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL ]
 ## Transitions:
 ## Reductions:
--- On TAIL SUB SIN POS POINT NOT LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL
+-- On TAIL SUB SIN POS POINT PI NOT LPAR LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL
 --   reduce production unary_operator -> TAIL
 
 State 4:
 ## Known stack suffix:
 ## SUB
 ## LR(1) items:
-unary_operator -> SUB . [ TAIL SUB SIN POS POINT NOT LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL ]
+unary_operator -> SUB . [ TAIL SUB SIN POS POINT PI NOT LPAR LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL ]
 ## Transitions:
 ## Reductions:
--- On TAIL SUB SIN POS POINT NOT LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL
+-- On TAIL SUB SIN POS POINT PI NOT LPAR LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL
 --   reduce production unary_operator -> SUB
 
 State 5:
 ## Known stack suffix:
 ## SIN
 ## LR(1) items:
-unary_operator -> SIN . [ TAIL SUB SIN POS POINT NOT LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL ]
+unary_operator -> SIN . [ TAIL SUB SIN POS POINT PI NOT LPAR LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL ]
 ## Transitions:
 ## Reductions:
--- On TAIL SUB SIN POS POINT NOT LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL
+-- On TAIL SUB SIN POS POINT PI NOT LPAR LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL
 --   reduce production unary_operator -> SIN
 
 State 6:
 ## Known stack suffix:
 ## POS
 ## LR(1) items:
-expression -> POS . LPAR expression COMMA expression RPAR [ TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD ]
+expression -> POS . LPAR expression COMMA expression RPAR [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
 ## Transitions:
 -- On LPAR shift to state 7
 ## Reductions:
@@ -101,33 +109,35 @@ State 7:
 ## Known stack suffix:
 ## POS LPAR
 ## LR(1) items:
-expression -> POS LPAR . expression COMMA expression RPAR [ TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD ]
+expression -> POS LPAR . expression COMMA expression RPAR [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
 ## Transitions:
 -- On TAIL shift to state 3
 -- On SUB shift to state 4
 -- On SIN shift to state 5
 -- On POS shift to state 6
 -- On POINT shift to state 8
--- On NOT shift to state 10
--- On LCUR shift to state 11
--- On INT shift to state 12
--- On ID shift to state 13
--- On HEAD shift to state 14
--- On FLOOR shift to state 15
--- On FLOAT_OF_INT shift to state 16
--- On FLOAT shift to state 17
--- On COS shift to state 18
--- On COLOR shift to state 19
--- On BOOL_LITERAL shift to state 21
--- On unary_operator shift to state 22
--- On expression shift to state 65
+-- On PI shift to state 10
+-- On NOT shift to state 11
+-- On LPAR shift to state 12
+-- On LCUR shift to state 13
+-- On INT shift to state 14
+-- On ID shift to state 15
+-- On HEAD shift to state 16
+-- On FLOOR shift to state 17
+-- On FLOAT_OF_INT shift to state 18
+-- On FLOAT shift to state 19
+-- On COS shift to state 20
+-- On COLOR shift to state 21
+-- On BOOL_LITERAL shift to state 23
+-- On unary_operator shift to state 24
+-- On expression shift to state 69
 ## Reductions:
 
 State 8:
 ## Known stack suffix:
 ## POINT
 ## LR(1) items:
-expression -> POINT . LPAR expression COMMA expression RPAR [ TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD ]
+expression -> POINT . LPAR expression COMMA expression RPAR [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
 ## Transitions:
 -- On LPAR shift to state 9
 ## Reductions:
@@ -136,742 +146,796 @@ State 9:
 ## Known stack suffix:
 ## POINT LPAR
 ## LR(1) items:
-expression -> POINT LPAR . expression COMMA expression RPAR [ TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD ]
+expression -> POINT LPAR . expression COMMA expression RPAR [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
 ## Transitions:
 -- On TAIL shift to state 3
 -- On SUB shift to state 4
 -- On SIN shift to state 5
 -- On POS shift to state 6
 -- On POINT shift to state 8
--- On NOT shift to state 10
--- On LCUR shift to state 11
--- On INT shift to state 12
--- On ID shift to state 13
--- On HEAD shift to state 14
--- On FLOOR shift to state 15
--- On FLOAT_OF_INT shift to state 16
--- On FLOAT shift to state 17
--- On COS shift to state 18
--- On COLOR shift to state 19
--- On BOOL_LITERAL shift to state 21
--- On unary_operator shift to state 22
--- On expression shift to state 61
+-- On PI shift to state 10
+-- On NOT shift to state 11
+-- On LPAR shift to state 12
+-- On LCUR shift to state 13
+-- On INT shift to state 14
+-- On ID shift to state 15
+-- On HEAD shift to state 16
+-- On FLOOR shift to state 17
+-- On FLOAT_OF_INT shift to state 18
+-- On FLOAT shift to state 19
+-- On COS shift to state 20
+-- On COLOR shift to state 21
+-- On BOOL_LITERAL shift to state 23
+-- On unary_operator shift to state 24
+-- On expression shift to state 65
 ## Reductions:
 
 State 10:
 ## Known stack suffix:
-## NOT
+## PI
 ## LR(1) items:
-unary_operator -> NOT . [ TAIL SUB SIN POS POINT NOT LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL ]
+expression -> PI . [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
 ## Transitions:
 ## Reductions:
--- On TAIL SUB SIN POS POINT NOT LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL
---   reduce production unary_operator -> NOT
+-- On TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD
+--   reduce production expression -> PI
 
 State 11:
 ## Known stack suffix:
-## LCUR
+## NOT
 ## LR(1) items:
-expression -> LCUR . expression_list RCUR [ TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD ]
+unary_operator -> NOT . [ TAIL SUB SIN POS POINT PI NOT LPAR LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL ]
+## Transitions:
+## Reductions:
+-- On TAIL SUB SIN POS POINT PI NOT LPAR LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL
+--   reduce production unary_operator -> NOT
+
+State 12:
+## Known stack suffix:
+## LPAR
+## LR(1) items:
+expression -> LPAR . expression RPAR [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
 ## Transitions:
 -- On TAIL shift to state 3
 -- On SUB shift to state 4
 -- On SIN shift to state 5
 -- On POS shift to state 6
 -- On POINT shift to state 8
--- On NOT shift to state 10
--- On LCUR shift to state 11
--- On INT shift to state 12
--- On ID shift to state 13
--- On HEAD shift to state 14
--- On FLOOR shift to state 15
--- On FLOAT_OF_INT shift to state 16
--- On FLOAT shift to state 17
--- On COS shift to state 18
--- On COLOR shift to state 19
--- On BOOL_LITERAL shift to state 21
--- On unary_operator shift to state 22
--- On expression_list shift to state 56
--- On expression shift to state 58
+-- On PI shift to state 10
+-- On NOT shift to state 11
+-- On LPAR shift to state 12
+-- On LCUR shift to state 13
+-- On INT shift to state 14
+-- On ID shift to state 15
+-- On HEAD shift to state 16
+-- On FLOOR shift to state 17
+-- On FLOAT_OF_INT shift to state 18
+-- On FLOAT shift to state 19
+-- On COS shift to state 20
+-- On COLOR shift to state 21
+-- On BOOL_LITERAL shift to state 23
+-- On unary_operator shift to state 24
+-- On expression shift to state 63
+## Reductions:
+
+State 13:
+## Known stack suffix:
+## LCUR
+## LR(1) items:
+expression -> LCUR . expression_list RCUR [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
+## Transitions:
+-- On TAIL shift to state 3
+-- On SUB shift to state 4
+-- On SIN shift to state 5
+-- On POS shift to state 6
+-- On POINT shift to state 8
+-- On PI shift to state 10
+-- On NOT shift to state 11
+-- On LPAR shift to state 12
+-- On LCUR shift to state 13
+-- On INT shift to state 14
+-- On ID shift to state 15
+-- On HEAD shift to state 16
+-- On FLOOR shift to state 17
+-- On FLOAT_OF_INT shift to state 18
+-- On FLOAT shift to state 19
+-- On COS shift to state 20
+-- On COLOR shift to state 21
+-- On BOOL_LITERAL shift to state 23
+-- On unary_operator shift to state 24
+-- On expression_list shift to state 58
+-- On expression shift to state 60
 ## Reductions:
 -- On RCUR
 --   reduce production expression_list ->
 
-State 12:
+State 14:
 ## Known stack suffix:
 ## INT
 ## LR(1) items:
-expression -> INT . [ TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD ]
+expression -> INT . [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
 ## Transitions:
 ## Reductions:
--- On TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD
+-- On TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD
 --   reduce production expression -> INT
-
-State 13:
-## Known stack suffix:
-## ID
-## LR(1) items:
-expression -> ID . [ TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD ]
-## Transitions:
-## Reductions:
--- On TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD
---   reduce production expression -> ID
-
-State 14:
-## Known stack suffix:
-## HEAD
-## LR(1) items:
-unary_operator -> HEAD . [ TAIL SUB SIN POS POINT NOT LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL ]
-## Transitions:
-## Reductions:
--- On TAIL SUB SIN POS POINT NOT LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL
---   reduce production unary_operator -> HEAD
 
 State 15:
 ## Known stack suffix:
-## FLOOR
+## ID
 ## LR(1) items:
-unary_operator -> FLOOR . [ TAIL SUB SIN POS POINT NOT LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL ]
+expression -> ID . [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
 ## Transitions:
 ## Reductions:
--- On TAIL SUB SIN POS POINT NOT LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL
---   reduce production unary_operator -> FLOOR
+-- On TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD
+--   reduce production expression -> ID
 
 State 16:
 ## Known stack suffix:
-## FLOAT_OF_INT
+## HEAD
 ## LR(1) items:
-unary_operator -> FLOAT_OF_INT . [ TAIL SUB SIN POS POINT NOT LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL ]
+unary_operator -> HEAD . [ TAIL SUB SIN POS POINT PI NOT LPAR LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL ]
 ## Transitions:
 ## Reductions:
--- On TAIL SUB SIN POS POINT NOT LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL
---   reduce production unary_operator -> FLOAT_OF_INT
+-- On TAIL SUB SIN POS POINT PI NOT LPAR LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL
+--   reduce production unary_operator -> HEAD
 
 State 17:
 ## Known stack suffix:
-## FLOAT
+## FLOOR
 ## LR(1) items:
-expression -> FLOAT . [ TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD ]
+unary_operator -> FLOOR . [ TAIL SUB SIN POS POINT PI NOT LPAR LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL ]
 ## Transitions:
 ## Reductions:
--- On TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD
---   reduce production expression -> FLOAT
+-- On TAIL SUB SIN POS POINT PI NOT LPAR LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL
+--   reduce production unary_operator -> FLOOR
 
 State 18:
 ## Known stack suffix:
-## COS
+## FLOAT_OF_INT
 ## LR(1) items:
-unary_operator -> COS . [ TAIL SUB SIN POS POINT NOT LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL ]
+unary_operator -> FLOAT_OF_INT . [ TAIL SUB SIN POS POINT PI NOT LPAR LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL ]
 ## Transitions:
 ## Reductions:
--- On TAIL SUB SIN POS POINT NOT LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL
---   reduce production unary_operator -> COS
+-- On TAIL SUB SIN POS POINT PI NOT LPAR LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL
+--   reduce production unary_operator -> FLOAT_OF_INT
 
 State 19:
 ## Known stack suffix:
-## COLOR
+## FLOAT
 ## LR(1) items:
-expression -> COLOR . LPAR expression COMMA expression COMMA expression RPAR [ TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD ]
+expression -> FLOAT . [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
 ## Transitions:
--- On LPAR shift to state 20
 ## Reductions:
+-- On TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD
+--   reduce production expression -> FLOAT
 
 State 20:
 ## Known stack suffix:
-## COLOR LPAR
+## COS
 ## LR(1) items:
-expression -> COLOR LPAR . expression COMMA expression COMMA expression RPAR [ TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD ]
+unary_operator -> COS . [ TAIL SUB SIN POS POINT PI NOT LPAR LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL ]
 ## Transitions:
--- On TAIL shift to state 3
--- On SUB shift to state 4
--- On SIN shift to state 5
--- On POS shift to state 6
--- On POINT shift to state 8
--- On NOT shift to state 10
--- On LCUR shift to state 11
--- On INT shift to state 12
--- On ID shift to state 13
--- On HEAD shift to state 14
--- On FLOOR shift to state 15
--- On FLOAT_OF_INT shift to state 16
--- On FLOAT shift to state 17
--- On COS shift to state 18
--- On COLOR shift to state 19
--- On BOOL_LITERAL shift to state 21
--- On unary_operator shift to state 22
--- On expression shift to state 50
 ## Reductions:
+-- On TAIL SUB SIN POS POINT PI NOT LPAR LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL
+--   reduce production unary_operator -> COS
 
 State 21:
 ## Known stack suffix:
-## BOOL_LITERAL
+## COLOR
 ## LR(1) items:
-expression -> BOOL_LITERAL . [ TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD ]
+expression -> COLOR . LPAR expression COMMA expression COMMA expression RPAR [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
 ## Transitions:
+-- On LPAR shift to state 22
 ## Reductions:
--- On TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD
---   reduce production expression -> BOOL_LITERAL
 
 State 22:
 ## Known stack suffix:
-## unary_operator
+## COLOR LPAR
 ## LR(1) items:
-expression -> unary_operator . expression [ TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD ]
+expression -> COLOR LPAR . expression COMMA expression COMMA expression RPAR [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
 ## Transitions:
 -- On TAIL shift to state 3
 -- On SUB shift to state 4
 -- On SIN shift to state 5
 -- On POS shift to state 6
 -- On POINT shift to state 8
--- On NOT shift to state 10
--- On LCUR shift to state 11
--- On INT shift to state 12
--- On ID shift to state 13
--- On HEAD shift to state 14
--- On FLOOR shift to state 15
--- On FLOAT_OF_INT shift to state 16
--- On FLOAT shift to state 17
--- On COS shift to state 18
--- On COLOR shift to state 19
--- On BOOL_LITERAL shift to state 21
--- On unary_operator shift to state 22
--- On expression shift to state 23
+-- On PI shift to state 10
+-- On NOT shift to state 11
+-- On LPAR shift to state 12
+-- On LCUR shift to state 13
+-- On INT shift to state 14
+-- On ID shift to state 15
+-- On HEAD shift to state 16
+-- On FLOOR shift to state 17
+-- On FLOAT_OF_INT shift to state 18
+-- On FLOAT shift to state 19
+-- On COS shift to state 20
+-- On COLOR shift to state 21
+-- On BOOL_LITERAL shift to state 23
+-- On unary_operator shift to state 24
+-- On expression shift to state 52
 ## Reductions:
 
 State 23:
 ## Known stack suffix:
-## unary_operator expression
+## BOOL_LITERAL
 ## LR(1) items:
-expression -> expression . binary_operator expression [ TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD ]
-expression -> unary_operator expression . [ TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD ]
-expression -> expression . DOT field_accessor [ TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD ]
-expression -> expression . CONS expression [ TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD ]
+expression -> BOOL_LITERAL . [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
 ## Transitions:
--- On SUB shift to state 24
--- On OR shift to state 25
--- On NE shift to state 26
--- On MUL shift to state 27
--- On MOD shift to state 28
--- On LT shift to state 29
--- On LE shift to state 30
--- On GT shift to state 31
--- On GE shift to state 32
--- On EQ shift to state 33
--- On DOT shift to state 34
--- On DIV shift to state 43
--- On CONS shift to state 44
--- On AND shift to state 46
--- On ADD shift to state 47
--- On binary_operator shift to state 48
 ## Reductions:
--- On TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD
---   reduce production expression -> unary_operator expression
-** Conflict on SUB OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS AND ADD
+-- On TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD
+--   reduce production expression -> BOOL_LITERAL
 
 State 24:
 ## Known stack suffix:
-## SUB
+## unary_operator
 ## LR(1) items:
-binary_operator -> SUB . [ TAIL SUB SIN POS POINT NOT LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL ]
+expression -> unary_operator . expression [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
 ## Transitions:
+-- On TAIL shift to state 3
+-- On SUB shift to state 4
+-- On SIN shift to state 5
+-- On POS shift to state 6
+-- On POINT shift to state 8
+-- On PI shift to state 10
+-- On NOT shift to state 11
+-- On LPAR shift to state 12
+-- On LCUR shift to state 13
+-- On INT shift to state 14
+-- On ID shift to state 15
+-- On HEAD shift to state 16
+-- On FLOOR shift to state 17
+-- On FLOAT_OF_INT shift to state 18
+-- On FLOAT shift to state 19
+-- On COS shift to state 20
+-- On COLOR shift to state 21
+-- On BOOL_LITERAL shift to state 23
+-- On unary_operator shift to state 24
+-- On expression shift to state 25
 ## Reductions:
--- On TAIL SUB SIN POS POINT NOT LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL
---   reduce production binary_operator -> SUB
 
 State 25:
 ## Known stack suffix:
-## OR
+## unary_operator expression
 ## LR(1) items:
-binary_operator -> OR . [ TAIL SUB SIN POS POINT NOT LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL ]
+expression -> expression . binary_operator expression [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
+expression -> unary_operator expression . [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
+expression -> expression . DOT field_accessor [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
+expression -> expression . CONS expression [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
 ## Transitions:
+-- On SUB shift to state 26
+-- On OR shift to state 27
+-- On NE shift to state 28
+-- On MUL shift to state 29
+-- On MOD shift to state 30
+-- On LT shift to state 31
+-- On LE shift to state 32
+-- On GT shift to state 33
+-- On GE shift to state 34
+-- On EQ shift to state 35
+-- On DOT shift to state 36
+-- On DIV shift to state 45
+-- On CONS shift to state 46
+-- On AND shift to state 48
+-- On ADD shift to state 49
+-- On binary_operator shift to state 50
 ## Reductions:
--- On TAIL SUB SIN POS POINT NOT LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL
---   reduce production binary_operator -> OR
+-- On TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD
+--   reduce production expression -> unary_operator expression
+** Conflict on SUB OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS AND ADD
 
 State 26:
 ## Known stack suffix:
-## NE
+## SUB
 ## LR(1) items:
-binary_operator -> NE . [ TAIL SUB SIN POS POINT NOT LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL ]
+binary_operator -> SUB . [ TAIL SUB SIN POS POINT PI NOT LPAR LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL ]
 ## Transitions:
 ## Reductions:
--- On TAIL SUB SIN POS POINT NOT LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL
---   reduce production binary_operator -> NE
+-- On TAIL SUB SIN POS POINT PI NOT LPAR LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL
+--   reduce production binary_operator -> SUB
 
 State 27:
 ## Known stack suffix:
-## MUL
+## OR
 ## LR(1) items:
-binary_operator -> MUL . [ TAIL SUB SIN POS POINT NOT LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL ]
+binary_operator -> OR . [ TAIL SUB SIN POS POINT PI NOT LPAR LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL ]
 ## Transitions:
 ## Reductions:
--- On TAIL SUB SIN POS POINT NOT LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL
---   reduce production binary_operator -> MUL
+-- On TAIL SUB SIN POS POINT PI NOT LPAR LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL
+--   reduce production binary_operator -> OR
 
 State 28:
 ## Known stack suffix:
-## MOD
+## NE
 ## LR(1) items:
-binary_operator -> MOD . [ TAIL SUB SIN POS POINT NOT LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL ]
+binary_operator -> NE . [ TAIL SUB SIN POS POINT PI NOT LPAR LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL ]
 ## Transitions:
 ## Reductions:
--- On TAIL SUB SIN POS POINT NOT LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL
---   reduce production binary_operator -> MOD
+-- On TAIL SUB SIN POS POINT PI NOT LPAR LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL
+--   reduce production binary_operator -> NE
 
 State 29:
 ## Known stack suffix:
-## LT
+## MUL
 ## LR(1) items:
-binary_operator -> LT . [ TAIL SUB SIN POS POINT NOT LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL ]
+binary_operator -> MUL . [ TAIL SUB SIN POS POINT PI NOT LPAR LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL ]
 ## Transitions:
 ## Reductions:
--- On TAIL SUB SIN POS POINT NOT LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL
---   reduce production binary_operator -> LT
+-- On TAIL SUB SIN POS POINT PI NOT LPAR LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL
+--   reduce production binary_operator -> MUL
 
 State 30:
 ## Known stack suffix:
-## LE
+## MOD
 ## LR(1) items:
-binary_operator -> LE . [ TAIL SUB SIN POS POINT NOT LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL ]
+binary_operator -> MOD . [ TAIL SUB SIN POS POINT PI NOT LPAR LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL ]
 ## Transitions:
 ## Reductions:
--- On TAIL SUB SIN POS POINT NOT LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL
---   reduce production binary_operator -> LE
+-- On TAIL SUB SIN POS POINT PI NOT LPAR LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL
+--   reduce production binary_operator -> MOD
 
 State 31:
 ## Known stack suffix:
-## GT
+## LT
 ## LR(1) items:
-binary_operator -> GT . [ TAIL SUB SIN POS POINT NOT LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL ]
+binary_operator -> LT . [ TAIL SUB SIN POS POINT PI NOT LPAR LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL ]
 ## Transitions:
 ## Reductions:
--- On TAIL SUB SIN POS POINT NOT LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL
---   reduce production binary_operator -> GT
+-- On TAIL SUB SIN POS POINT PI NOT LPAR LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL
+--   reduce production binary_operator -> LT
 
 State 32:
 ## Known stack suffix:
-## GE
+## LE
 ## LR(1) items:
-binary_operator -> GE . [ TAIL SUB SIN POS POINT NOT LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL ]
+binary_operator -> LE . [ TAIL SUB SIN POS POINT PI NOT LPAR LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL ]
 ## Transitions:
 ## Reductions:
--- On TAIL SUB SIN POS POINT NOT LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL
---   reduce production binary_operator -> GE
+-- On TAIL SUB SIN POS POINT PI NOT LPAR LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL
+--   reduce production binary_operator -> LE
 
 State 33:
 ## Known stack suffix:
-## EQ
+## GT
 ## LR(1) items:
-binary_operator -> EQ . [ TAIL SUB SIN POS POINT NOT LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL ]
+binary_operator -> GT . [ TAIL SUB SIN POS POINT PI NOT LPAR LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL ]
 ## Transitions:
 ## Reductions:
--- On TAIL SUB SIN POS POINT NOT LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL
---   reduce production binary_operator -> EQ
+-- On TAIL SUB SIN POS POINT PI NOT LPAR LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL
+--   reduce production binary_operator -> GT
 
 State 34:
 ## Known stack suffix:
-## expression DOT
+## GE
 ## LR(1) items:
-expression -> expression DOT . field_accessor [ TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD ]
+binary_operator -> GE . [ TAIL SUB SIN POS POINT PI NOT LPAR LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL ]
 ## Transitions:
--- On Y shift to state 35
--- On X shift to state 36
--- On RED shift to state 37
--- On POS shift to state 38
--- On GREEN shift to state 39
--- On COLOR shift to state 40
--- On BLUE shift to state 41
--- On field_accessor shift to state 42
 ## Reductions:
+-- On TAIL SUB SIN POS POINT PI NOT LPAR LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL
+--   reduce production binary_operator -> GE
 
 State 35:
 ## Known stack suffix:
-## Y
+## EQ
 ## LR(1) items:
-field_accessor -> Y . [ TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD ]
+binary_operator -> EQ . [ TAIL SUB SIN POS POINT PI NOT LPAR LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL ]
 ## Transitions:
 ## Reductions:
--- On TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD
---   reduce production field_accessor -> Y
+-- On TAIL SUB SIN POS POINT PI NOT LPAR LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL
+--   reduce production binary_operator -> EQ
 
 State 36:
 ## Known stack suffix:
-## X
+## expression DOT
 ## LR(1) items:
-field_accessor -> X . [ TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD ]
+expression -> expression DOT . field_accessor [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
 ## Transitions:
+-- On Y shift to state 37
+-- On X shift to state 38
+-- On RED shift to state 39
+-- On POS shift to state 40
+-- On GREEN shift to state 41
+-- On COLOR shift to state 42
+-- On BLUE shift to state 43
+-- On field_accessor shift to state 44
 ## Reductions:
--- On TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD
---   reduce production field_accessor -> X
 
 State 37:
 ## Known stack suffix:
-## RED
+## Y
 ## LR(1) items:
-field_accessor -> RED . [ TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD ]
+field_accessor -> Y . [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
 ## Transitions:
 ## Reductions:
--- On TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD
---   reduce production field_accessor -> RED
+-- On TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD
+--   reduce production field_accessor -> Y
 
 State 38:
 ## Known stack suffix:
-## POS
+## X
 ## LR(1) items:
-field_accessor -> POS . [ TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD ]
+field_accessor -> X . [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
 ## Transitions:
 ## Reductions:
--- On TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD
---   reduce production field_accessor -> POS
+-- On TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD
+--   reduce production field_accessor -> X
 
 State 39:
 ## Known stack suffix:
-## GREEN
+## RED
 ## LR(1) items:
-field_accessor -> GREEN . [ TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD ]
+field_accessor -> RED . [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
 ## Transitions:
 ## Reductions:
--- On TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD
---   reduce production field_accessor -> GREEN
+-- On TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD
+--   reduce production field_accessor -> RED
 
 State 40:
 ## Known stack suffix:
-## COLOR
+## POS
 ## LR(1) items:
-field_accessor -> COLOR . [ TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD ]
+field_accessor -> POS . [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
 ## Transitions:
 ## Reductions:
--- On TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD
---   reduce production field_accessor -> COLOR
+-- On TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD
+--   reduce production field_accessor -> POS
 
 State 41:
 ## Known stack suffix:
-## BLUE
+## GREEN
 ## LR(1) items:
-field_accessor -> BLUE . [ TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD ]
+field_accessor -> GREEN . [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
 ## Transitions:
 ## Reductions:
--- On TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD
---   reduce production field_accessor -> BLUE
+-- On TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD
+--   reduce production field_accessor -> GREEN
 
 State 42:
 ## Known stack suffix:
-## expression DOT field_accessor
+## COLOR
 ## LR(1) items:
-expression -> expression DOT field_accessor . [ TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD ]
+field_accessor -> COLOR . [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
 ## Transitions:
 ## Reductions:
--- On TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD
---   reduce production expression -> expression DOT field_accessor
+-- On TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD
+--   reduce production field_accessor -> COLOR
 
 State 43:
 ## Known stack suffix:
-## DIV
+## BLUE
 ## LR(1) items:
-binary_operator -> DIV . [ TAIL SUB SIN POS POINT NOT LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL ]
+field_accessor -> BLUE . [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
 ## Transitions:
 ## Reductions:
--- On TAIL SUB SIN POS POINT NOT LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL
---   reduce production binary_operator -> DIV
+-- On TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD
+--   reduce production field_accessor -> BLUE
 
 State 44:
 ## Known stack suffix:
-## expression CONS
+## expression DOT field_accessor
 ## LR(1) items:
-expression -> expression CONS . expression [ TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD ]
+expression -> expression DOT field_accessor . [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
 ## Transitions:
--- On TAIL shift to state 3
--- On SUB shift to state 4
--- On SIN shift to state 5
--- On POS shift to state 6
--- On POINT shift to state 8
--- On NOT shift to state 10
--- On LCUR shift to state 11
--- On INT shift to state 12
--- On ID shift to state 13
--- On HEAD shift to state 14
--- On FLOOR shift to state 15
--- On FLOAT_OF_INT shift to state 16
--- On FLOAT shift to state 17
--- On COS shift to state 18
--- On COLOR shift to state 19
--- On BOOL_LITERAL shift to state 21
--- On unary_operator shift to state 22
--- On expression shift to state 45
 ## Reductions:
+-- On TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD
+--   reduce production expression -> expression DOT field_accessor
 
 State 45:
 ## Known stack suffix:
-## expression CONS expression
+## DIV
 ## LR(1) items:
-expression -> expression . binary_operator expression [ TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD ]
-expression -> expression . DOT field_accessor [ TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD ]
-expression -> expression . CONS expression [ TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD ]
-expression -> expression CONS expression . [ TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD ]
+binary_operator -> DIV . [ TAIL SUB SIN POS POINT PI NOT LPAR LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL ]
 ## Transitions:
--- On SUB shift to state 24
--- On OR shift to state 25
--- On NE shift to state 26
--- On MUL shift to state 27
--- On MOD shift to state 28
--- On LT shift to state 29
--- On LE shift to state 30
--- On GT shift to state 31
--- On GE shift to state 32
--- On EQ shift to state 33
--- On DOT shift to state 34
--- On DIV shift to state 43
--- On CONS shift to state 44
--- On AND shift to state 46
--- On ADD shift to state 47
--- On binary_operator shift to state 48
 ## Reductions:
--- On TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD
---   reduce production expression -> expression CONS expression
-** Conflict on SUB OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS AND ADD
+-- On TAIL SUB SIN POS POINT PI NOT LPAR LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL
+--   reduce production binary_operator -> DIV
 
 State 46:
 ## Known stack suffix:
-## AND
+## expression CONS
 ## LR(1) items:
-binary_operator -> AND . [ TAIL SUB SIN POS POINT NOT LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL ]
-## Transitions:
-## Reductions:
--- On TAIL SUB SIN POS POINT NOT LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL
---   reduce production binary_operator -> AND
-
-State 47:
-## Known stack suffix:
-## ADD
-## LR(1) items:
-binary_operator -> ADD . [ TAIL SUB SIN POS POINT NOT LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL ]
-## Transitions:
-## Reductions:
--- On TAIL SUB SIN POS POINT NOT LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL
---   reduce production binary_operator -> ADD
-
-State 48:
-## Known stack suffix:
-## expression binary_operator
-## LR(1) items:
-expression -> expression binary_operator . expression [ TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD ]
+expression -> expression CONS . expression [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
 ## Transitions:
 -- On TAIL shift to state 3
 -- On SUB shift to state 4
 -- On SIN shift to state 5
 -- On POS shift to state 6
 -- On POINT shift to state 8
--- On NOT shift to state 10
--- On LCUR shift to state 11
--- On INT shift to state 12
--- On ID shift to state 13
--- On HEAD shift to state 14
--- On FLOOR shift to state 15
--- On FLOAT_OF_INT shift to state 16
--- On FLOAT shift to state 17
--- On COS shift to state 18
--- On COLOR shift to state 19
--- On BOOL_LITERAL shift to state 21
--- On unary_operator shift to state 22
--- On expression shift to state 49
+-- On PI shift to state 10
+-- On NOT shift to state 11
+-- On LPAR shift to state 12
+-- On LCUR shift to state 13
+-- On INT shift to state 14
+-- On ID shift to state 15
+-- On HEAD shift to state 16
+-- On FLOOR shift to state 17
+-- On FLOAT_OF_INT shift to state 18
+-- On FLOAT shift to state 19
+-- On COS shift to state 20
+-- On COLOR shift to state 21
+-- On BOOL_LITERAL shift to state 23
+-- On unary_operator shift to state 24
+-- On expression shift to state 47
 ## Reductions:
+
+State 47:
+## Known stack suffix:
+## expression CONS expression
+## LR(1) items:
+expression -> expression . binary_operator expression [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
+expression -> expression . DOT field_accessor [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
+expression -> expression . CONS expression [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
+expression -> expression CONS expression . [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
+## Transitions:
+-- On SUB shift to state 26
+-- On OR shift to state 27
+-- On NE shift to state 28
+-- On MUL shift to state 29
+-- On MOD shift to state 30
+-- On LT shift to state 31
+-- On LE shift to state 32
+-- On GT shift to state 33
+-- On GE shift to state 34
+-- On EQ shift to state 35
+-- On DOT shift to state 36
+-- On DIV shift to state 45
+-- On CONS shift to state 46
+-- On AND shift to state 48
+-- On ADD shift to state 49
+-- On binary_operator shift to state 50
+## Reductions:
+-- On TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD
+--   reduce production expression -> expression CONS expression
+** Conflict on SUB OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS AND ADD
+
+State 48:
+## Known stack suffix:
+## AND
+## LR(1) items:
+binary_operator -> AND . [ TAIL SUB SIN POS POINT PI NOT LPAR LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL ]
+## Transitions:
+## Reductions:
+-- On TAIL SUB SIN POS POINT PI NOT LPAR LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL
+--   reduce production binary_operator -> AND
 
 State 49:
 ## Known stack suffix:
-## expression binary_operator expression
+## ADD
 ## LR(1) items:
-expression -> expression . binary_operator expression [ TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD ]
-expression -> expression binary_operator expression . [ TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD ]
-expression -> expression . DOT field_accessor [ TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD ]
-expression -> expression . CONS expression [ TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD ]
+binary_operator -> ADD . [ TAIL SUB SIN POS POINT PI NOT LPAR LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL ]
 ## Transitions:
--- On SUB shift to state 24
--- On OR shift to state 25
--- On NE shift to state 26
--- On MUL shift to state 27
--- On MOD shift to state 28
--- On LT shift to state 29
--- On LE shift to state 30
--- On GT shift to state 31
--- On GE shift to state 32
--- On EQ shift to state 33
--- On DOT shift to state 34
--- On DIV shift to state 43
--- On CONS shift to state 44
--- On AND shift to state 46
--- On ADD shift to state 47
--- On binary_operator shift to state 48
 ## Reductions:
--- On TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD
---   reduce production expression -> expression binary_operator expression
-** Conflict on SUB OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS AND ADD
+-- On TAIL SUB SIN POS POINT PI NOT LPAR LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL
+--   reduce production binary_operator -> ADD
 
 State 50:
 ## Known stack suffix:
-## COLOR LPAR expression
+## expression binary_operator
 ## LR(1) items:
-expression -> COLOR LPAR expression . COMMA expression COMMA expression RPAR [ TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD ]
-expression -> expression . binary_operator expression [ SUB OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS COMMA AND ADD ]
-expression -> expression . DOT field_accessor [ SUB OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS COMMA AND ADD ]
-expression -> expression . CONS expression [ SUB OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS COMMA AND ADD ]
+expression -> expression binary_operator . expression [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
 ## Transitions:
--- On SUB shift to state 24
--- On OR shift to state 25
--- On NE shift to state 26
--- On MUL shift to state 27
--- On MOD shift to state 28
--- On LT shift to state 29
--- On LE shift to state 30
--- On GT shift to state 31
--- On GE shift to state 32
--- On EQ shift to state 33
--- On DOT shift to state 34
--- On DIV shift to state 43
--- On CONS shift to state 44
--- On COMMA shift to state 51
--- On AND shift to state 46
--- On ADD shift to state 47
--- On binary_operator shift to state 48
+-- On TAIL shift to state 3
+-- On SUB shift to state 4
+-- On SIN shift to state 5
+-- On POS shift to state 6
+-- On POINT shift to state 8
+-- On PI shift to state 10
+-- On NOT shift to state 11
+-- On LPAR shift to state 12
+-- On LCUR shift to state 13
+-- On INT shift to state 14
+-- On ID shift to state 15
+-- On HEAD shift to state 16
+-- On FLOOR shift to state 17
+-- On FLOAT_OF_INT shift to state 18
+-- On FLOAT shift to state 19
+-- On COS shift to state 20
+-- On COLOR shift to state 21
+-- On BOOL_LITERAL shift to state 23
+-- On unary_operator shift to state 24
+-- On expression shift to state 51
 ## Reductions:
 
 State 51:
 ## Known stack suffix:
-## COLOR LPAR expression COMMA
+## expression binary_operator expression
 ## LR(1) items:
-expression -> COLOR LPAR expression COMMA . expression COMMA expression RPAR [ TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD ]
+expression -> expression . binary_operator expression [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
+expression -> expression binary_operator expression . [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
+expression -> expression . DOT field_accessor [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
+expression -> expression . CONS expression [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
 ## Transitions:
--- On TAIL shift to state 3
--- On SUB shift to state 4
--- On SIN shift to state 5
--- On POS shift to state 6
--- On POINT shift to state 8
--- On NOT shift to state 10
--- On LCUR shift to state 11
--- On INT shift to state 12
--- On ID shift to state 13
--- On HEAD shift to state 14
--- On FLOOR shift to state 15
--- On FLOAT_OF_INT shift to state 16
--- On FLOAT shift to state 17
--- On COS shift to state 18
--- On COLOR shift to state 19
--- On BOOL_LITERAL shift to state 21
--- On unary_operator shift to state 22
--- On expression shift to state 52
+-- On SUB shift to state 26
+-- On OR shift to state 27
+-- On NE shift to state 28
+-- On MUL shift to state 29
+-- On MOD shift to state 30
+-- On LT shift to state 31
+-- On LE shift to state 32
+-- On GT shift to state 33
+-- On GE shift to state 34
+-- On EQ shift to state 35
+-- On DOT shift to state 36
+-- On DIV shift to state 45
+-- On CONS shift to state 46
+-- On AND shift to state 48
+-- On ADD shift to state 49
+-- On binary_operator shift to state 50
 ## Reductions:
+-- On TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD
+--   reduce production expression -> expression binary_operator expression
+** Conflict on SUB OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS AND ADD
 
 State 52:
 ## Known stack suffix:
-## COLOR LPAR expression COMMA expression
+## COLOR LPAR expression
 ## LR(1) items:
-expression -> COLOR LPAR expression COMMA expression . COMMA expression RPAR [ TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD ]
+expression -> COLOR LPAR expression . COMMA expression COMMA expression RPAR [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
 expression -> expression . binary_operator expression [ SUB OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS COMMA AND ADD ]
 expression -> expression . DOT field_accessor [ SUB OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS COMMA AND ADD ]
 expression -> expression . CONS expression [ SUB OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS COMMA AND ADD ]
 ## Transitions:
--- On SUB shift to state 24
--- On OR shift to state 25
--- On NE shift to state 26
--- On MUL shift to state 27
--- On MOD shift to state 28
--- On LT shift to state 29
--- On LE shift to state 30
--- On GT shift to state 31
--- On GE shift to state 32
--- On EQ shift to state 33
--- On DOT shift to state 34
--- On DIV shift to state 43
--- On CONS shift to state 44
+-- On SUB shift to state 26
+-- On OR shift to state 27
+-- On NE shift to state 28
+-- On MUL shift to state 29
+-- On MOD shift to state 30
+-- On LT shift to state 31
+-- On LE shift to state 32
+-- On GT shift to state 33
+-- On GE shift to state 34
+-- On EQ shift to state 35
+-- On DOT shift to state 36
+-- On DIV shift to state 45
+-- On CONS shift to state 46
 -- On COMMA shift to state 53
--- On AND shift to state 46
--- On ADD shift to state 47
--- On binary_operator shift to state 48
+-- On AND shift to state 48
+-- On ADD shift to state 49
+-- On binary_operator shift to state 50
 ## Reductions:
 
 State 53:
 ## Known stack suffix:
-## COLOR LPAR expression COMMA expression COMMA
+## COLOR LPAR expression COMMA
 ## LR(1) items:
-expression -> COLOR LPAR expression COMMA expression COMMA . expression RPAR [ TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD ]
+expression -> COLOR LPAR expression COMMA . expression COMMA expression RPAR [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
 ## Transitions:
 -- On TAIL shift to state 3
 -- On SUB shift to state 4
 -- On SIN shift to state 5
 -- On POS shift to state 6
 -- On POINT shift to state 8
--- On NOT shift to state 10
--- On LCUR shift to state 11
--- On INT shift to state 12
--- On ID shift to state 13
--- On HEAD shift to state 14
--- On FLOOR shift to state 15
--- On FLOAT_OF_INT shift to state 16
--- On FLOAT shift to state 17
--- On COS shift to state 18
--- On COLOR shift to state 19
--- On BOOL_LITERAL shift to state 21
--- On unary_operator shift to state 22
+-- On PI shift to state 10
+-- On NOT shift to state 11
+-- On LPAR shift to state 12
+-- On LCUR shift to state 13
+-- On INT shift to state 14
+-- On ID shift to state 15
+-- On HEAD shift to state 16
+-- On FLOOR shift to state 17
+-- On FLOAT_OF_INT shift to state 18
+-- On FLOAT shift to state 19
+-- On COS shift to state 20
+-- On COLOR shift to state 21
+-- On BOOL_LITERAL shift to state 23
+-- On unary_operator shift to state 24
 -- On expression shift to state 54
 ## Reductions:
 
 State 54:
 ## Known stack suffix:
-## COLOR LPAR expression COMMA expression COMMA expression
+## COLOR LPAR expression COMMA expression
 ## LR(1) items:
-expression -> COLOR LPAR expression COMMA expression COMMA expression . RPAR [ TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD ]
-expression -> expression . binary_operator expression [ SUB RPAR OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS AND ADD ]
-expression -> expression . DOT field_accessor [ SUB RPAR OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS AND ADD ]
-expression -> expression . CONS expression [ SUB RPAR OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS AND ADD ]
+expression -> COLOR LPAR expression COMMA expression . COMMA expression RPAR [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
+expression -> expression . binary_operator expression [ SUB OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS COMMA AND ADD ]
+expression -> expression . DOT field_accessor [ SUB OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS COMMA AND ADD ]
+expression -> expression . CONS expression [ SUB OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS COMMA AND ADD ]
 ## Transitions:
--- On SUB shift to state 24
--- On RPAR shift to state 55
--- On OR shift to state 25
--- On NE shift to state 26
--- On MUL shift to state 27
--- On MOD shift to state 28
--- On LT shift to state 29
--- On LE shift to state 30
--- On GT shift to state 31
--- On GE shift to state 32
--- On EQ shift to state 33
--- On DOT shift to state 34
--- On DIV shift to state 43
--- On CONS shift to state 44
--- On AND shift to state 46
--- On ADD shift to state 47
--- On binary_operator shift to state 48
+-- On SUB shift to state 26
+-- On OR shift to state 27
+-- On NE shift to state 28
+-- On MUL shift to state 29
+-- On MOD shift to state 30
+-- On LT shift to state 31
+-- On LE shift to state 32
+-- On GT shift to state 33
+-- On GE shift to state 34
+-- On EQ shift to state 35
+-- On DOT shift to state 36
+-- On DIV shift to state 45
+-- On CONS shift to state 46
+-- On COMMA shift to state 55
+-- On AND shift to state 48
+-- On ADD shift to state 49
+-- On binary_operator shift to state 50
 ## Reductions:
 
 State 55:
 ## Known stack suffix:
-## COLOR LPAR expression COMMA expression COMMA expression RPAR
+## COLOR LPAR expression COMMA expression COMMA
 ## LR(1) items:
-expression -> COLOR LPAR expression COMMA expression COMMA expression RPAR . [ TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD ]
+expression -> COLOR LPAR expression COMMA expression COMMA . expression RPAR [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
 ## Transitions:
+-- On TAIL shift to state 3
+-- On SUB shift to state 4
+-- On SIN shift to state 5
+-- On POS shift to state 6
+-- On POINT shift to state 8
+-- On PI shift to state 10
+-- On NOT shift to state 11
+-- On LPAR shift to state 12
+-- On LCUR shift to state 13
+-- On INT shift to state 14
+-- On ID shift to state 15
+-- On HEAD shift to state 16
+-- On FLOOR shift to state 17
+-- On FLOAT_OF_INT shift to state 18
+-- On FLOAT shift to state 19
+-- On COS shift to state 20
+-- On COLOR shift to state 21
+-- On BOOL_LITERAL shift to state 23
+-- On unary_operator shift to state 24
+-- On expression shift to state 56
 ## Reductions:
--- On TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD
---   reduce production expression -> COLOR LPAR expression COMMA expression COMMA expression RPAR
 
 State 56:
 ## Known stack suffix:
-## LCUR expression_list
+## COLOR LPAR expression COMMA expression COMMA expression
 ## LR(1) items:
-expression -> LCUR expression_list . RCUR [ TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD ]
+expression -> COLOR LPAR expression COMMA expression COMMA expression . RPAR [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
+expression -> expression . binary_operator expression [ SUB RPAR OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS AND ADD ]
+expression -> expression . DOT field_accessor [ SUB RPAR OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS AND ADD ]
+expression -> expression . CONS expression [ SUB RPAR OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS AND ADD ]
 ## Transitions:
--- On RCUR shift to state 57
+-- On SUB shift to state 26
+-- On RPAR shift to state 57
+-- On OR shift to state 27
+-- On NE shift to state 28
+-- On MUL shift to state 29
+-- On MOD shift to state 30
+-- On LT shift to state 31
+-- On LE shift to state 32
+-- On GT shift to state 33
+-- On GE shift to state 34
+-- On EQ shift to state 35
+-- On DOT shift to state 36
+-- On DIV shift to state 45
+-- On CONS shift to state 46
+-- On AND shift to state 48
+-- On ADD shift to state 49
+-- On binary_operator shift to state 50
 ## Reductions:
 
 State 57:
 ## Known stack suffix:
-## LCUR expression_list RCUR
+## COLOR LPAR expression COMMA expression COMMA expression RPAR
 ## LR(1) items:
-expression -> LCUR expression_list RCUR . [ TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD ]
+expression -> COLOR LPAR expression COMMA expression COMMA expression RPAR . [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
 ## Transitions:
 ## Reductions:
--- On TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD
---   reduce production expression -> LCUR expression_list RCUR
+-- On TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD
+--   reduce production expression -> COLOR LPAR expression COMMA expression COMMA expression RPAR
 
 State 58:
+## Known stack suffix:
+## LCUR expression_list
+## LR(1) items:
+expression -> LCUR expression_list . RCUR [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
+## Transitions:
+-- On RCUR shift to state 59
+## Reductions:
+
+State 59:
+## Known stack suffix:
+## LCUR expression_list RCUR
+## LR(1) items:
+expression -> LCUR expression_list RCUR . [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
+## Transitions:
+## Reductions:
+-- On TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD
+--   reduce production expression -> LCUR expression_list RCUR
+
+State 60:
 ## Known stack suffix:
 ## expression
 ## LR(1) items:
@@ -881,28 +945,28 @@ expression -> expression . CONS expression [ SUB RCUR OR NE MUL MOD LT LE GT GE 
 expression_list -> expression . [ RCUR ]
 expression_list -> expression . COMMA expression_list [ RCUR ]
 ## Transitions:
--- On SUB shift to state 24
--- On OR shift to state 25
--- On NE shift to state 26
--- On MUL shift to state 27
--- On MOD shift to state 28
--- On LT shift to state 29
--- On LE shift to state 30
--- On GT shift to state 31
--- On GE shift to state 32
--- On EQ shift to state 33
--- On DOT shift to state 34
--- On DIV shift to state 43
--- On CONS shift to state 44
--- On COMMA shift to state 59
--- On AND shift to state 46
--- On ADD shift to state 47
--- On binary_operator shift to state 48
+-- On SUB shift to state 26
+-- On OR shift to state 27
+-- On NE shift to state 28
+-- On MUL shift to state 29
+-- On MOD shift to state 30
+-- On LT shift to state 31
+-- On LE shift to state 32
+-- On GT shift to state 33
+-- On GE shift to state 34
+-- On EQ shift to state 35
+-- On DOT shift to state 36
+-- On DIV shift to state 45
+-- On CONS shift to state 46
+-- On COMMA shift to state 61
+-- On AND shift to state 48
+-- On ADD shift to state 49
+-- On binary_operator shift to state 50
 ## Reductions:
 -- On RCUR
 --   reduce production expression_list -> expression
 
-State 59:
+State 61:
 ## Known stack suffix:
 ## expression COMMA
 ## LR(1) items:
@@ -913,25 +977,27 @@ expression_list -> expression COMMA . expression_list [ RCUR ]
 -- On SIN shift to state 5
 -- On POS shift to state 6
 -- On POINT shift to state 8
--- On NOT shift to state 10
--- On LCUR shift to state 11
--- On INT shift to state 12
--- On ID shift to state 13
--- On HEAD shift to state 14
--- On FLOOR shift to state 15
--- On FLOAT_OF_INT shift to state 16
--- On FLOAT shift to state 17
--- On COS shift to state 18
--- On COLOR shift to state 19
--- On BOOL_LITERAL shift to state 21
--- On unary_operator shift to state 22
--- On expression_list shift to state 60
--- On expression shift to state 58
+-- On PI shift to state 10
+-- On NOT shift to state 11
+-- On LPAR shift to state 12
+-- On LCUR shift to state 13
+-- On INT shift to state 14
+-- On ID shift to state 15
+-- On HEAD shift to state 16
+-- On FLOOR shift to state 17
+-- On FLOAT_OF_INT shift to state 18
+-- On FLOAT shift to state 19
+-- On COS shift to state 20
+-- On COLOR shift to state 21
+-- On BOOL_LITERAL shift to state 23
+-- On unary_operator shift to state 24
+-- On expression_list shift to state 62
+-- On expression shift to state 60
 ## Reductions:
 -- On RCUR
 --   reduce production expression_list ->
 
-State 60:
+State 62:
 ## Known stack suffix:
 ## expression COMMA expression_list
 ## LR(1) items:
@@ -941,191 +1007,233 @@ expression_list -> expression COMMA expression_list . [ RCUR ]
 -- On RCUR
 --   reduce production expression_list -> expression COMMA expression_list
 
-State 61:
-## Known stack suffix:
-## POINT LPAR expression
-## LR(1) items:
-expression -> POINT LPAR expression . COMMA expression RPAR [ TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD ]
-expression -> expression . binary_operator expression [ SUB OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS COMMA AND ADD ]
-expression -> expression . DOT field_accessor [ SUB OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS COMMA AND ADD ]
-expression -> expression . CONS expression [ SUB OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS COMMA AND ADD ]
-## Transitions:
--- On SUB shift to state 24
--- On OR shift to state 25
--- On NE shift to state 26
--- On MUL shift to state 27
--- On MOD shift to state 28
--- On LT shift to state 29
--- On LE shift to state 30
--- On GT shift to state 31
--- On GE shift to state 32
--- On EQ shift to state 33
--- On DOT shift to state 34
--- On DIV shift to state 43
--- On CONS shift to state 44
--- On COMMA shift to state 62
--- On AND shift to state 46
--- On ADD shift to state 47
--- On binary_operator shift to state 48
-## Reductions:
-
-State 62:
-## Known stack suffix:
-## POINT LPAR expression COMMA
-## LR(1) items:
-expression -> POINT LPAR expression COMMA . expression RPAR [ TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD ]
-## Transitions:
--- On TAIL shift to state 3
--- On SUB shift to state 4
--- On SIN shift to state 5
--- On POS shift to state 6
--- On POINT shift to state 8
--- On NOT shift to state 10
--- On LCUR shift to state 11
--- On INT shift to state 12
--- On ID shift to state 13
--- On HEAD shift to state 14
--- On FLOOR shift to state 15
--- On FLOAT_OF_INT shift to state 16
--- On FLOAT shift to state 17
--- On COS shift to state 18
--- On COLOR shift to state 19
--- On BOOL_LITERAL shift to state 21
--- On unary_operator shift to state 22
--- On expression shift to state 63
-## Reductions:
-
 State 63:
 ## Known stack suffix:
-## POINT LPAR expression COMMA expression
+## LPAR expression
 ## LR(1) items:
-expression -> POINT LPAR expression COMMA expression . RPAR [ TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD ]
 expression -> expression . binary_operator expression [ SUB RPAR OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS AND ADD ]
 expression -> expression . DOT field_accessor [ SUB RPAR OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS AND ADD ]
 expression -> expression . CONS expression [ SUB RPAR OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS AND ADD ]
+expression -> LPAR expression . RPAR [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
 ## Transitions:
--- On SUB shift to state 24
+-- On SUB shift to state 26
 -- On RPAR shift to state 64
--- On OR shift to state 25
--- On NE shift to state 26
--- On MUL shift to state 27
--- On MOD shift to state 28
--- On LT shift to state 29
--- On LE shift to state 30
--- On GT shift to state 31
--- On GE shift to state 32
--- On EQ shift to state 33
--- On DOT shift to state 34
--- On DIV shift to state 43
--- On CONS shift to state 44
--- On AND shift to state 46
--- On ADD shift to state 47
--- On binary_operator shift to state 48
+-- On OR shift to state 27
+-- On NE shift to state 28
+-- On MUL shift to state 29
+-- On MOD shift to state 30
+-- On LT shift to state 31
+-- On LE shift to state 32
+-- On GT shift to state 33
+-- On GE shift to state 34
+-- On EQ shift to state 35
+-- On DOT shift to state 36
+-- On DIV shift to state 45
+-- On CONS shift to state 46
+-- On AND shift to state 48
+-- On ADD shift to state 49
+-- On binary_operator shift to state 50
 ## Reductions:
 
 State 64:
 ## Known stack suffix:
-## POINT LPAR expression COMMA expression RPAR
+## LPAR expression RPAR
 ## LR(1) items:
-expression -> POINT LPAR expression COMMA expression RPAR . [ TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD ]
+expression -> LPAR expression RPAR . [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
 ## Transitions:
 ## Reductions:
--- On TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD
---   reduce production expression -> POINT LPAR expression COMMA expression RPAR
+-- On TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD
+--   reduce production expression -> LPAR expression RPAR
 
 State 65:
 ## Known stack suffix:
-## POS LPAR expression
+## POINT LPAR expression
 ## LR(1) items:
-expression -> POS LPAR expression . COMMA expression RPAR [ TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD ]
+expression -> POINT LPAR expression . COMMA expression RPAR [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
 expression -> expression . binary_operator expression [ SUB OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS COMMA AND ADD ]
 expression -> expression . DOT field_accessor [ SUB OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS COMMA AND ADD ]
 expression -> expression . CONS expression [ SUB OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS COMMA AND ADD ]
 ## Transitions:
--- On SUB shift to state 24
--- On OR shift to state 25
--- On NE shift to state 26
--- On MUL shift to state 27
--- On MOD shift to state 28
--- On LT shift to state 29
--- On LE shift to state 30
--- On GT shift to state 31
--- On GE shift to state 32
--- On EQ shift to state 33
--- On DOT shift to state 34
--- On DIV shift to state 43
--- On CONS shift to state 44
+-- On SUB shift to state 26
+-- On OR shift to state 27
+-- On NE shift to state 28
+-- On MUL shift to state 29
+-- On MOD shift to state 30
+-- On LT shift to state 31
+-- On LE shift to state 32
+-- On GT shift to state 33
+-- On GE shift to state 34
+-- On EQ shift to state 35
+-- On DOT shift to state 36
+-- On DIV shift to state 45
+-- On CONS shift to state 46
 -- On COMMA shift to state 66
--- On AND shift to state 46
--- On ADD shift to state 47
--- On binary_operator shift to state 48
+-- On AND shift to state 48
+-- On ADD shift to state 49
+-- On binary_operator shift to state 50
 ## Reductions:
 
 State 66:
 ## Known stack suffix:
-## POS LPAR expression COMMA
+## POINT LPAR expression COMMA
 ## LR(1) items:
-expression -> POS LPAR expression COMMA . expression RPAR [ TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD ]
+expression -> POINT LPAR expression COMMA . expression RPAR [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
 ## Transitions:
 -- On TAIL shift to state 3
 -- On SUB shift to state 4
 -- On SIN shift to state 5
 -- On POS shift to state 6
 -- On POINT shift to state 8
--- On NOT shift to state 10
--- On LCUR shift to state 11
--- On INT shift to state 12
--- On ID shift to state 13
--- On HEAD shift to state 14
--- On FLOOR shift to state 15
--- On FLOAT_OF_INT shift to state 16
--- On FLOAT shift to state 17
--- On COS shift to state 18
--- On COLOR shift to state 19
--- On BOOL_LITERAL shift to state 21
--- On unary_operator shift to state 22
+-- On PI shift to state 10
+-- On NOT shift to state 11
+-- On LPAR shift to state 12
+-- On LCUR shift to state 13
+-- On INT shift to state 14
+-- On ID shift to state 15
+-- On HEAD shift to state 16
+-- On FLOOR shift to state 17
+-- On FLOAT_OF_INT shift to state 18
+-- On FLOAT shift to state 19
+-- On COS shift to state 20
+-- On COLOR shift to state 21
+-- On BOOL_LITERAL shift to state 23
+-- On unary_operator shift to state 24
 -- On expression shift to state 67
 ## Reductions:
 
 State 67:
 ## Known stack suffix:
-## POS LPAR expression COMMA expression
+## POINT LPAR expression COMMA expression
 ## LR(1) items:
-expression -> POS LPAR expression COMMA expression . RPAR [ TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD ]
+expression -> POINT LPAR expression COMMA expression . RPAR [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
 expression -> expression . binary_operator expression [ SUB RPAR OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS AND ADD ]
 expression -> expression . DOT field_accessor [ SUB RPAR OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS AND ADD ]
 expression -> expression . CONS expression [ SUB RPAR OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS AND ADD ]
 ## Transitions:
--- On SUB shift to state 24
+-- On SUB shift to state 26
 -- On RPAR shift to state 68
--- On OR shift to state 25
--- On NE shift to state 26
--- On MUL shift to state 27
--- On MOD shift to state 28
--- On LT shift to state 29
--- On LE shift to state 30
--- On GT shift to state 31
--- On GE shift to state 32
--- On EQ shift to state 33
--- On DOT shift to state 34
--- On DIV shift to state 43
--- On CONS shift to state 44
--- On AND shift to state 46
--- On ADD shift to state 47
--- On binary_operator shift to state 48
+-- On OR shift to state 27
+-- On NE shift to state 28
+-- On MUL shift to state 29
+-- On MOD shift to state 30
+-- On LT shift to state 31
+-- On LE shift to state 32
+-- On GT shift to state 33
+-- On GE shift to state 34
+-- On EQ shift to state 35
+-- On DOT shift to state 36
+-- On DIV shift to state 45
+-- On CONS shift to state 46
+-- On AND shift to state 48
+-- On ADD shift to state 49
+-- On binary_operator shift to state 50
 ## Reductions:
 
 State 68:
 ## Known stack suffix:
-## POS LPAR expression COMMA expression RPAR
+## POINT LPAR expression COMMA expression RPAR
 ## LR(1) items:
-expression -> POS LPAR expression COMMA expression RPAR . [ TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD ]
+expression -> POINT LPAR expression COMMA expression RPAR . [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
 ## Transitions:
 ## Reductions:
--- On TO TAIL SUB STEP SIN SEMICOLON RPAR RCUR PRINT POS POINT OR NOT NE MUL MOD LT LE LCUR INT IF ID HEAD GT GE FOREACH FOR FLOOR FLOAT_OF_INT FLOAT EQ EOF END ELSE DRAW DOT DIV COS COPY CONS COMMA COLOR BOOL_LITERAL BEGIN AND ADD
---   reduce production expression -> POS LPAR expression COMMA expression RPAR
+-- On TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD
+--   reduce production expression -> POINT LPAR expression COMMA expression RPAR
 
 State 69:
+## Known stack suffix:
+## POS LPAR expression
+## LR(1) items:
+expression -> POS LPAR expression . COMMA expression RPAR [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
+expression -> expression . binary_operator expression [ SUB OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS COMMA AND ADD ]
+expression -> expression . DOT field_accessor [ SUB OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS COMMA AND ADD ]
+expression -> expression . CONS expression [ SUB OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS COMMA AND ADD ]
+## Transitions:
+-- On SUB shift to state 26
+-- On OR shift to state 27
+-- On NE shift to state 28
+-- On MUL shift to state 29
+-- On MOD shift to state 30
+-- On LT shift to state 31
+-- On LE shift to state 32
+-- On GT shift to state 33
+-- On GE shift to state 34
+-- On EQ shift to state 35
+-- On DOT shift to state 36
+-- On DIV shift to state 45
+-- On CONS shift to state 46
+-- On COMMA shift to state 70
+-- On AND shift to state 48
+-- On ADD shift to state 49
+-- On binary_operator shift to state 50
+## Reductions:
+
+State 70:
+## Known stack suffix:
+## POS LPAR expression COMMA
+## LR(1) items:
+expression -> POS LPAR expression COMMA . expression RPAR [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
+## Transitions:
+-- On TAIL shift to state 3
+-- On SUB shift to state 4
+-- On SIN shift to state 5
+-- On POS shift to state 6
+-- On POINT shift to state 8
+-- On PI shift to state 10
+-- On NOT shift to state 11
+-- On LPAR shift to state 12
+-- On LCUR shift to state 13
+-- On INT shift to state 14
+-- On ID shift to state 15
+-- On HEAD shift to state 16
+-- On FLOOR shift to state 17
+-- On FLOAT_OF_INT shift to state 18
+-- On FLOAT shift to state 19
+-- On COS shift to state 20
+-- On COLOR shift to state 21
+-- On BOOL_LITERAL shift to state 23
+-- On unary_operator shift to state 24
+-- On expression shift to state 71
+## Reductions:
+
+State 71:
+## Known stack suffix:
+## POS LPAR expression COMMA expression
+## LR(1) items:
+expression -> POS LPAR expression COMMA expression . RPAR [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
+expression -> expression . binary_operator expression [ SUB RPAR OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS AND ADD ]
+expression -> expression . DOT field_accessor [ SUB RPAR OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS AND ADD ]
+expression -> expression . CONS expression [ SUB RPAR OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS AND ADD ]
+## Transitions:
+-- On SUB shift to state 26
+-- On RPAR shift to state 72
+-- On OR shift to state 27
+-- On NE shift to state 28
+-- On MUL shift to state 29
+-- On MOD shift to state 30
+-- On LT shift to state 31
+-- On LE shift to state 32
+-- On GT shift to state 33
+-- On GE shift to state 34
+-- On EQ shift to state 35
+-- On DOT shift to state 36
+-- On DIV shift to state 45
+-- On CONS shift to state 46
+-- On AND shift to state 48
+-- On ADD shift to state 49
+-- On binary_operator shift to state 50
+## Reductions:
+
+State 72:
+## Known stack suffix:
+## POS LPAR expression COMMA expression RPAR
+## LR(1) items:
+expression -> POS LPAR expression COMMA expression RPAR . [ TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD ]
+## Transitions:
+## Reductions:
+-- On TO SUB STEP SEMICOLON RPAR RCUR PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COMMA COLOR BOOL_TYP BEGIN AND ADD
+--   reduce production expression -> POS LPAR expression COMMA expression RPAR
+
+State 73:
 ## Known stack suffix:
 ## PRINT LPAR expression
 ## LR(1) items:
@@ -1134,26 +1242,26 @@ expression -> expression . DOT field_accessor [ SUB RPAR OR NE MUL MOD LT LE GT 
 expression -> expression . CONS expression [ SUB RPAR OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS AND ADD ]
 statement -> PRINT LPAR expression . RPAR [ SEMICOLON EOF END ELSE ]
 ## Transitions:
--- On SUB shift to state 24
--- On RPAR shift to state 70
--- On OR shift to state 25
--- On NE shift to state 26
--- On MUL shift to state 27
--- On MOD shift to state 28
--- On LT shift to state 29
--- On LE shift to state 30
--- On GT shift to state 31
--- On GE shift to state 32
--- On EQ shift to state 33
--- On DOT shift to state 34
--- On DIV shift to state 43
--- On CONS shift to state 44
--- On AND shift to state 46
--- On ADD shift to state 47
--- On binary_operator shift to state 48
+-- On SUB shift to state 26
+-- On RPAR shift to state 74
+-- On OR shift to state 27
+-- On NE shift to state 28
+-- On MUL shift to state 29
+-- On MOD shift to state 30
+-- On LT shift to state 31
+-- On LE shift to state 32
+-- On GT shift to state 33
+-- On GE shift to state 34
+-- On EQ shift to state 35
+-- On DOT shift to state 36
+-- On DIV shift to state 45
+-- On CONS shift to state 46
+-- On AND shift to state 48
+-- On ADD shift to state 49
+-- On binary_operator shift to state 50
 ## Reductions:
 
-State 70:
+State 74:
 ## Known stack suffix:
 ## PRINT LPAR expression RPAR
 ## LR(1) items:
@@ -1163,549 +1271,583 @@ statement -> PRINT LPAR expression RPAR . [ SEMICOLON EOF END ELSE ]
 -- On SEMICOLON EOF END ELSE
 --   reduce production statement -> PRINT LPAR expression RPAR
 
-State 71:
+State 75:
+## Known stack suffix:
+## POS
+## LR(1) items:
+type_expr -> POS . [ SEMICOLON RPAR LPAR GT ]
+## Transitions:
+## Reductions:
+-- On SEMICOLON RPAR LPAR GT
+--   reduce production type_expr -> POS
+
+State 76:
+## Known stack suffix:
+## POINT
+## LR(1) items:
+type_expr -> POINT . [ SEMICOLON RPAR LPAR GT ]
+## Transitions:
+## Reductions:
+-- On SEMICOLON RPAR LPAR GT
+--   reduce production type_expr -> POINT
+
+State 77:
 ## Known stack suffix:
 ## LT
 ## LR(1) items:
-program -> LT . argument_list GT statement_list [ EOF ]
+program -> LT . argument_list GT statement [ EOF ]
 ## Transitions:
--- On STRING shift to state 72
--- On argument_list shift to state 81
--- On argument shift to state 125
+-- On STRING shift to state 78
+-- On argument_list shift to state 88
+-- On argument shift to state 132
 ## Reductions:
 -- On GT
 --   reduce production argument_list ->
 
-State 72:
+State 78:
 ## Known stack suffix:
 ## STRING
 ## LR(1) items:
 argument -> STRING . type_expr [ SEMICOLON GT ]
 ## Transitions:
--- On POS shift to state 73
--- On POINT shift to state 74
--- On INT shift to state 75
--- On FLOAT shift to state 76
--- On COLOR shift to state 77
--- On BOOL shift to state 78
--- On type_expr shift to state 79
+-- On POS shift to state 75
+-- On POINT shift to state 76
+-- On LIST shift to state 79
+-- On INT_TYP shift to state 81
+-- On FLOAT_TYP shift to state 82
+-- On COLOR shift to state 83
+-- On BOOL_TYP shift to state 84
+-- On type_expr shift to state 87
 ## Reductions:
 
-State 73:
+State 79:
 ## Known stack suffix:
-## POS
+## LIST
 ## LR(1) items:
-type_expr -> POS . [ SEMICOLON LIST GT ]
+type_expr -> LIST . LPAR type_expr RPAR [ SEMICOLON RPAR LPAR GT ]
+## Transitions:
+-- On LPAR shift to state 80
+## Reductions:
+
+State 80:
+## Known stack suffix:
+## LIST LPAR
+## LR(1) items:
+type_expr -> LIST LPAR . type_expr RPAR [ SEMICOLON RPAR LPAR GT ]
+## Transitions:
+-- On POS shift to state 75
+-- On POINT shift to state 76
+-- On LIST shift to state 79
+-- On INT_TYP shift to state 81
+-- On FLOAT_TYP shift to state 82
+-- On COLOR shift to state 83
+-- On BOOL_TYP shift to state 84
+-- On type_expr shift to state 85
+## Reductions:
+
+State 81:
+## Known stack suffix:
+## INT_TYP
+## LR(1) items:
+type_expr -> INT_TYP . [ SEMICOLON RPAR LPAR GT ]
 ## Transitions:
 ## Reductions:
--- On SEMICOLON LIST GT
---   reduce production type_expr -> POS
+-- On SEMICOLON RPAR LPAR GT
+--   reduce production type_expr -> INT_TYP
 
-State 74:
+State 82:
 ## Known stack suffix:
-## POINT
+## FLOAT_TYP
 ## LR(1) items:
-type_expr -> POINT . [ SEMICOLON LIST GT ]
+type_expr -> FLOAT_TYP . [ SEMICOLON RPAR LPAR GT ]
 ## Transitions:
 ## Reductions:
--- On SEMICOLON LIST GT
---   reduce production type_expr -> POINT
+-- On SEMICOLON RPAR LPAR GT
+--   reduce production type_expr -> FLOAT_TYP
 
-State 75:
-## Known stack suffix:
-## INT
-## LR(1) items:
-type_expr -> INT . [ SEMICOLON LIST GT ]
-## Transitions:
-## Reductions:
--- On SEMICOLON LIST GT
---   reduce production type_expr -> INT
-
-State 76:
-## Known stack suffix:
-## FLOAT
-## LR(1) items:
-type_expr -> FLOAT . [ SEMICOLON LIST GT ]
-## Transitions:
-## Reductions:
--- On SEMICOLON LIST GT
---   reduce production type_expr -> FLOAT
-
-State 77:
+State 83:
 ## Known stack suffix:
 ## COLOR
 ## LR(1) items:
-type_expr -> COLOR . [ SEMICOLON LIST GT ]
+type_expr -> COLOR . [ SEMICOLON RPAR LPAR GT ]
 ## Transitions:
 ## Reductions:
--- On SEMICOLON LIST GT
+-- On SEMICOLON RPAR LPAR GT
 --   reduce production type_expr -> COLOR
 
-State 78:
+State 84:
 ## Known stack suffix:
-## BOOL
+## BOOL_TYP
 ## LR(1) items:
-type_expr -> BOOL . [ SEMICOLON LIST GT ]
+type_expr -> BOOL_TYP . [ SEMICOLON RPAR LPAR GT ]
 ## Transitions:
 ## Reductions:
--- On SEMICOLON LIST GT
---   reduce production type_expr -> BOOL
+-- On SEMICOLON RPAR LPAR GT
+--   reduce production type_expr -> BOOL_TYP
 
-State 79:
+State 85:
+## Known stack suffix:
+## LIST LPAR type_expr
+## LR(1) items:
+type_expr -> LIST LPAR type_expr . RPAR [ SEMICOLON RPAR LPAR GT ]
+## Transitions:
+-- On RPAR shift to state 86
+## Reductions:
+
+State 86:
+## Known stack suffix:
+## LIST LPAR type_expr RPAR
+## LR(1) items:
+type_expr -> LIST LPAR type_expr RPAR . [ SEMICOLON RPAR LPAR GT ]
+## Transitions:
+## Reductions:
+-- On SEMICOLON RPAR LPAR GT
+--   reduce production type_expr -> LIST LPAR type_expr RPAR
+
+State 87:
 ## Known stack suffix:
 ## STRING type_expr
 ## LR(1) items:
 argument -> STRING type_expr . [ SEMICOLON GT ]
-type_expr -> type_expr . LIST [ SEMICOLON LIST GT ]
 ## Transitions:
--- On LIST shift to state 80
 ## Reductions:
 -- On SEMICOLON GT
 --   reduce production argument -> STRING type_expr
 
-State 80:
-## Known stack suffix:
-## type_expr LIST
-## LR(1) items:
-type_expr -> type_expr LIST . [ SEMICOLON LIST GT ]
-## Transitions:
-## Reductions:
--- On SEMICOLON LIST GT
---   reduce production type_expr -> type_expr LIST
-
-State 81:
+State 88:
 ## Known stack suffix:
 ## LT argument_list
 ## LR(1) items:
-program -> LT argument_list . GT statement_list [ EOF ]
+program -> LT argument_list . GT statement [ EOF ]
 ## Transitions:
--- On GT shift to state 82
+-- On GT shift to state 89
 ## Reductions:
 
-State 82:
+State 89:
 ## Known stack suffix:
 ## LT argument_list GT
 ## LR(1) items:
-program -> LT argument_list GT . statement_list [ EOF ]
+program -> LT argument_list GT . statement [ EOF ]
 ## Transitions:
 -- On PRINT shift to state 1
--- On IF shift to state 83
--- On ID shift to state 87
--- On FOREACH shift to state 90
--- On FOR shift to state 94
--- On DRAW shift to state 102
--- On COPY shift to state 106
--- On BEGIN shift to state 111
--- On statement_list shift to state 124
--- On statement shift to state 114
+-- On POS shift to state 75
+-- On POINT shift to state 76
+-- On LIST shift to state 79
+-- On INT_TYP shift to state 81
+-- On IF shift to state 90
+-- On FOREACH shift to state 94
+-- On FOR shift to state 98
+-- On FLOAT_TYP shift to state 82
+-- On DRAW shift to state 106
+-- On COPY shift to state 110
+-- On COLOR shift to state 83
+-- On BOOL_TYP shift to state 84
+-- On BEGIN shift to state 116
+-- On type_expr shift to state 117
+-- On statement shift to state 131
 ## Reductions:
 -- On EOF
---   reduce production statement_list ->
+--   reduce production statement ->
 
-State 83:
+State 90:
 ## Known stack suffix:
 ## IF
 ## LR(1) items:
-statement -> IF . LPAR expression RPAR statement SEMICOLON [ SEMICOLON EOF END ELSE ]
-statement -> IF . LPAR expression RPAR statement ELSE statement SEMICOLON [ SEMICOLON EOF END ELSE ]
+statement -> IF . LPAR expression RPAR statement [ SEMICOLON EOF END ELSE ]
+statement -> IF . LPAR expression RPAR statement ELSE statement [ SEMICOLON EOF END ELSE ]
 ## Transitions:
--- On LPAR shift to state 84
+-- On LPAR shift to state 91
 ## Reductions:
 
-State 84:
+State 91:
 ## Known stack suffix:
 ## IF LPAR
 ## LR(1) items:
-statement -> IF LPAR . expression RPAR statement SEMICOLON [ SEMICOLON EOF END ELSE ]
-statement -> IF LPAR . expression RPAR statement ELSE statement SEMICOLON [ SEMICOLON EOF END ELSE ]
+statement -> IF LPAR . expression RPAR statement [ SEMICOLON EOF END ELSE ]
+statement -> IF LPAR . expression RPAR statement ELSE statement [ SEMICOLON EOF END ELSE ]
 ## Transitions:
 -- On TAIL shift to state 3
 -- On SUB shift to state 4
 -- On SIN shift to state 5
 -- On POS shift to state 6
 -- On POINT shift to state 8
--- On NOT shift to state 10
--- On LCUR shift to state 11
--- On INT shift to state 12
--- On ID shift to state 13
--- On HEAD shift to state 14
--- On FLOOR shift to state 15
--- On FLOAT_OF_INT shift to state 16
--- On FLOAT shift to state 17
--- On COS shift to state 18
--- On COLOR shift to state 19
--- On BOOL_LITERAL shift to state 21
--- On unary_operator shift to state 22
--- On expression shift to state 85
+-- On PI shift to state 10
+-- On NOT shift to state 11
+-- On LPAR shift to state 12
+-- On LCUR shift to state 13
+-- On INT shift to state 14
+-- On ID shift to state 15
+-- On HEAD shift to state 16
+-- On FLOOR shift to state 17
+-- On FLOAT_OF_INT shift to state 18
+-- On FLOAT shift to state 19
+-- On COS shift to state 20
+-- On COLOR shift to state 21
+-- On BOOL_LITERAL shift to state 23
+-- On unary_operator shift to state 24
+-- On expression shift to state 92
 ## Reductions:
 
-State 85:
+State 92:
 ## Known stack suffix:
 ## IF LPAR expression
 ## LR(1) items:
 expression -> expression . binary_operator expression [ SUB RPAR OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS AND ADD ]
 expression -> expression . DOT field_accessor [ SUB RPAR OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS AND ADD ]
 expression -> expression . CONS expression [ SUB RPAR OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS AND ADD ]
-statement -> IF LPAR expression . RPAR statement SEMICOLON [ SEMICOLON EOF END ELSE ]
-statement -> IF LPAR expression . RPAR statement ELSE statement SEMICOLON [ SEMICOLON EOF END ELSE ]
+statement -> IF LPAR expression . RPAR statement [ SEMICOLON EOF END ELSE ]
+statement -> IF LPAR expression . RPAR statement ELSE statement [ SEMICOLON EOF END ELSE ]
 ## Transitions:
--- On SUB shift to state 24
--- On RPAR shift to state 86
--- On OR shift to state 25
--- On NE shift to state 26
--- On MUL shift to state 27
--- On MOD shift to state 28
--- On LT shift to state 29
--- On LE shift to state 30
--- On GT shift to state 31
--- On GE shift to state 32
--- On EQ shift to state 33
--- On DOT shift to state 34
--- On DIV shift to state 43
--- On CONS shift to state 44
--- On AND shift to state 46
--- On ADD shift to state 47
--- On binary_operator shift to state 48
-## Reductions:
-
-State 86:
-## Known stack suffix:
-## IF LPAR expression RPAR
-## LR(1) items:
-statement -> IF LPAR expression RPAR . statement SEMICOLON [ SEMICOLON EOF END ELSE ]
-statement -> IF LPAR expression RPAR . statement ELSE statement SEMICOLON [ SEMICOLON EOF END ELSE ]
-## Transitions:
--- On PRINT shift to state 1
--- On IF shift to state 83
--- On ID shift to state 87
--- On FOREACH shift to state 90
--- On FOR shift to state 94
--- On DRAW shift to state 102
--- On COPY shift to state 106
--- On BEGIN shift to state 111
--- On statement shift to state 119
-## Reductions:
-
-State 87:
-## Known stack suffix:
-## ID
-## LR(1) items:
-statement -> ID . type_expr SEMICOLON [ SEMICOLON EOF END ELSE ]
-## Transitions:
--- On POS shift to state 73
--- On POINT shift to state 74
--- On INT shift to state 75
--- On FLOAT shift to state 76
--- On COLOR shift to state 77
--- On BOOL shift to state 78
--- On type_expr shift to state 88
-## Reductions:
-
-State 88:
-## Known stack suffix:
-## ID type_expr
-## LR(1) items:
-statement -> ID type_expr . SEMICOLON [ SEMICOLON EOF END ELSE ]
-type_expr -> type_expr . LIST [ SEMICOLON LIST ]
-## Transitions:
--- On SEMICOLON shift to state 89
--- On LIST shift to state 80
-## Reductions:
-
-State 89:
-## Known stack suffix:
-## ID type_expr SEMICOLON
-## LR(1) items:
-statement -> ID type_expr SEMICOLON . [ SEMICOLON EOF END ELSE ]
-## Transitions:
-## Reductions:
--- On SEMICOLON EOF END ELSE
---   reduce production statement -> ID type_expr SEMICOLON
-
-State 90:
-## Known stack suffix:
-## FOREACH
-## LR(1) items:
-statement -> FOREACH . ID IN expression statement_list [ SEMICOLON EOF END ELSE ]
-## Transitions:
--- On ID shift to state 91
-## Reductions:
-
-State 91:
-## Known stack suffix:
-## FOREACH ID
-## LR(1) items:
-statement -> FOREACH ID . IN expression statement_list [ SEMICOLON EOF END ELSE ]
-## Transitions:
--- On IN shift to state 92
-## Reductions:
-
-State 92:
-## Known stack suffix:
-## FOREACH ID IN
-## LR(1) items:
-statement -> FOREACH ID IN . expression statement_list [ SEMICOLON EOF END ELSE ]
-## Transitions:
--- On TAIL shift to state 3
--- On SUB shift to state 4
--- On SIN shift to state 5
--- On POS shift to state 6
--- On POINT shift to state 8
--- On NOT shift to state 10
--- On LCUR shift to state 11
--- On INT shift to state 12
--- On ID shift to state 13
--- On HEAD shift to state 14
--- On FLOOR shift to state 15
--- On FLOAT_OF_INT shift to state 16
--- On FLOAT shift to state 17
--- On COS shift to state 18
--- On COLOR shift to state 19
--- On BOOL_LITERAL shift to state 21
--- On unary_operator shift to state 22
--- On expression shift to state 93
+-- On SUB shift to state 26
+-- On RPAR shift to state 93
+-- On OR shift to state 27
+-- On NE shift to state 28
+-- On MUL shift to state 29
+-- On MOD shift to state 30
+-- On LT shift to state 31
+-- On LE shift to state 32
+-- On GT shift to state 33
+-- On GE shift to state 34
+-- On EQ shift to state 35
+-- On DOT shift to state 36
+-- On DIV shift to state 45
+-- On CONS shift to state 46
+-- On AND shift to state 48
+-- On ADD shift to state 49
+-- On binary_operator shift to state 50
 ## Reductions:
 
 State 93:
 ## Known stack suffix:
-## FOREACH ID IN expression
+## IF LPAR expression RPAR
 ## LR(1) items:
-expression -> expression . binary_operator expression [ SUB SEMICOLON PRINT OR NE MUL MOD LT LE IF ID GT GE FOREACH FOR EQ EOF END ELSE DRAW DOT DIV COPY CONS BEGIN AND ADD ]
-expression -> expression . DOT field_accessor [ SUB SEMICOLON PRINT OR NE MUL MOD LT LE IF ID GT GE FOREACH FOR EQ EOF END ELSE DRAW DOT DIV COPY CONS BEGIN AND ADD ]
-expression -> expression . CONS expression [ SUB SEMICOLON PRINT OR NE MUL MOD LT LE IF ID GT GE FOREACH FOR EQ EOF END ELSE DRAW DOT DIV COPY CONS BEGIN AND ADD ]
-statement -> FOREACH ID IN expression . statement_list [ SEMICOLON EOF END ELSE ]
+statement -> IF LPAR expression RPAR . statement [ SEMICOLON EOF END ELSE ]
+statement -> IF LPAR expression RPAR . statement ELSE statement [ SEMICOLON EOF END ELSE ]
 ## Transitions:
--- On SUB shift to state 24
 -- On PRINT shift to state 1
--- On OR shift to state 25
--- On NE shift to state 26
--- On MUL shift to state 27
--- On MOD shift to state 28
--- On LT shift to state 29
--- On LE shift to state 30
--- On IF shift to state 83
--- On ID shift to state 87
--- On GT shift to state 31
--- On GE shift to state 32
--- On FOREACH shift to state 90
--- On FOR shift to state 94
--- On EQ shift to state 33
--- On DRAW shift to state 102
--- On DOT shift to state 34
--- On DIV shift to state 43
--- On COPY shift to state 106
--- On CONS shift to state 44
--- On BEGIN shift to state 111
--- On AND shift to state 46
--- On ADD shift to state 47
--- On statement_list shift to state 118
--- On statement shift to state 114
--- On binary_operator shift to state 48
+-- On POS shift to state 75
+-- On POINT shift to state 76
+-- On LIST shift to state 79
+-- On INT_TYP shift to state 81
+-- On IF shift to state 90
+-- On FOREACH shift to state 94
+-- On FOR shift to state 98
+-- On FLOAT_TYP shift to state 82
+-- On DRAW shift to state 106
+-- On COPY shift to state 110
+-- On COLOR shift to state 83
+-- On BOOL_TYP shift to state 84
+-- On BEGIN shift to state 116
+-- On type_expr shift to state 117
+-- On statement shift to state 128
 ## Reductions:
 -- On SEMICOLON EOF END ELSE
---   reduce production statement_list ->
+--   reduce production statement ->
 
 State 94:
 ## Known stack suffix:
-## FOR
+## FOREACH
 ## LR(1) items:
-statement -> FOR . ID FROM expression TO expression STEP expression statement_list [ SEMICOLON EOF END ELSE ]
+statement -> FOREACH . ID IN expression statement [ SEMICOLON EOF END ELSE ]
 ## Transitions:
 -- On ID shift to state 95
 ## Reductions:
 
 State 95:
 ## Known stack suffix:
-## FOR ID
+## FOREACH ID
 ## LR(1) items:
-statement -> FOR ID . FROM expression TO expression STEP expression statement_list [ SEMICOLON EOF END ELSE ]
+statement -> FOREACH ID . IN expression statement [ SEMICOLON EOF END ELSE ]
 ## Transitions:
--- On FROM shift to state 96
+-- On IN shift to state 96
 ## Reductions:
 
 State 96:
 ## Known stack suffix:
-## FOR ID FROM
+## FOREACH ID IN
 ## LR(1) items:
-statement -> FOR ID FROM . expression TO expression STEP expression statement_list [ SEMICOLON EOF END ELSE ]
+statement -> FOREACH ID IN . expression statement [ SEMICOLON EOF END ELSE ]
 ## Transitions:
 -- On TAIL shift to state 3
 -- On SUB shift to state 4
 -- On SIN shift to state 5
 -- On POS shift to state 6
 -- On POINT shift to state 8
--- On NOT shift to state 10
--- On LCUR shift to state 11
--- On INT shift to state 12
--- On ID shift to state 13
--- On HEAD shift to state 14
--- On FLOOR shift to state 15
--- On FLOAT_OF_INT shift to state 16
--- On FLOAT shift to state 17
--- On COS shift to state 18
--- On COLOR shift to state 19
--- On BOOL_LITERAL shift to state 21
--- On unary_operator shift to state 22
+-- On PI shift to state 10
+-- On NOT shift to state 11
+-- On LPAR shift to state 12
+-- On LCUR shift to state 13
+-- On INT shift to state 14
+-- On ID shift to state 15
+-- On HEAD shift to state 16
+-- On FLOOR shift to state 17
+-- On FLOAT_OF_INT shift to state 18
+-- On FLOAT shift to state 19
+-- On COS shift to state 20
+-- On COLOR shift to state 21
+-- On BOOL_LITERAL shift to state 23
+-- On unary_operator shift to state 24
 -- On expression shift to state 97
 ## Reductions:
 
 State 97:
+## Known stack suffix:
+## FOREACH ID IN expression
+## LR(1) items:
+expression -> expression . binary_operator expression [ SUB SEMICOLON PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COLOR BOOL_TYP BEGIN AND ADD ]
+expression -> expression . DOT field_accessor [ SUB SEMICOLON PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COLOR BOOL_TYP BEGIN AND ADD ]
+expression -> expression . CONS expression [ SUB SEMICOLON PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COLOR BOOL_TYP BEGIN AND ADD ]
+statement -> FOREACH ID IN expression . statement [ SEMICOLON EOF END ELSE ]
+## Transitions:
+-- On SUB shift to state 26
+-- On PRINT shift to state 1
+-- On POS shift to state 75
+-- On POINT shift to state 76
+-- On OR shift to state 27
+-- On NE shift to state 28
+-- On MUL shift to state 29
+-- On MOD shift to state 30
+-- On LT shift to state 31
+-- On LIST shift to state 79
+-- On LE shift to state 32
+-- On INT_TYP shift to state 81
+-- On IF shift to state 90
+-- On GT shift to state 33
+-- On GE shift to state 34
+-- On FOREACH shift to state 94
+-- On FOR shift to state 98
+-- On FLOAT_TYP shift to state 82
+-- On EQ shift to state 35
+-- On DRAW shift to state 106
+-- On DOT shift to state 36
+-- On DIV shift to state 45
+-- On COPY shift to state 110
+-- On CONS shift to state 46
+-- On COLOR shift to state 83
+-- On BOOL_TYP shift to state 84
+-- On BEGIN shift to state 116
+-- On AND shift to state 48
+-- On ADD shift to state 49
+-- On type_expr shift to state 117
+-- On statement shift to state 127
+-- On binary_operator shift to state 50
+## Reductions:
+-- On SEMICOLON EOF END ELSE
+--   reduce production statement ->
+
+State 98:
+## Known stack suffix:
+## FOR
+## LR(1) items:
+statement -> FOR . ID FROM expression TO expression STEP expression statement [ SEMICOLON EOF END ELSE ]
+## Transitions:
+-- On ID shift to state 99
+## Reductions:
+
+State 99:
+## Known stack suffix:
+## FOR ID
+## LR(1) items:
+statement -> FOR ID . FROM expression TO expression STEP expression statement [ SEMICOLON EOF END ELSE ]
+## Transitions:
+-- On FROM shift to state 100
+## Reductions:
+
+State 100:
+## Known stack suffix:
+## FOR ID FROM
+## LR(1) items:
+statement -> FOR ID FROM . expression TO expression STEP expression statement [ SEMICOLON EOF END ELSE ]
+## Transitions:
+-- On TAIL shift to state 3
+-- On SUB shift to state 4
+-- On SIN shift to state 5
+-- On POS shift to state 6
+-- On POINT shift to state 8
+-- On PI shift to state 10
+-- On NOT shift to state 11
+-- On LPAR shift to state 12
+-- On LCUR shift to state 13
+-- On INT shift to state 14
+-- On ID shift to state 15
+-- On HEAD shift to state 16
+-- On FLOOR shift to state 17
+-- On FLOAT_OF_INT shift to state 18
+-- On FLOAT shift to state 19
+-- On COS shift to state 20
+-- On COLOR shift to state 21
+-- On BOOL_LITERAL shift to state 23
+-- On unary_operator shift to state 24
+-- On expression shift to state 101
+## Reductions:
+
+State 101:
 ## Known stack suffix:
 ## FOR ID FROM expression
 ## LR(1) items:
 expression -> expression . binary_operator expression [ TO SUB OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS AND ADD ]
 expression -> expression . DOT field_accessor [ TO SUB OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS AND ADD ]
 expression -> expression . CONS expression [ TO SUB OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS AND ADD ]
-statement -> FOR ID FROM expression . TO expression STEP expression statement_list [ SEMICOLON EOF END ELSE ]
+statement -> FOR ID FROM expression . TO expression STEP expression statement [ SEMICOLON EOF END ELSE ]
 ## Transitions:
--- On TO shift to state 98
--- On SUB shift to state 24
--- On OR shift to state 25
--- On NE shift to state 26
--- On MUL shift to state 27
--- On MOD shift to state 28
--- On LT shift to state 29
--- On LE shift to state 30
--- On GT shift to state 31
--- On GE shift to state 32
--- On EQ shift to state 33
--- On DOT shift to state 34
--- On DIV shift to state 43
--- On CONS shift to state 44
--- On AND shift to state 46
--- On ADD shift to state 47
--- On binary_operator shift to state 48
+-- On TO shift to state 102
+-- On SUB shift to state 26
+-- On OR shift to state 27
+-- On NE shift to state 28
+-- On MUL shift to state 29
+-- On MOD shift to state 30
+-- On LT shift to state 31
+-- On LE shift to state 32
+-- On GT shift to state 33
+-- On GE shift to state 34
+-- On EQ shift to state 35
+-- On DOT shift to state 36
+-- On DIV shift to state 45
+-- On CONS shift to state 46
+-- On AND shift to state 48
+-- On ADD shift to state 49
+-- On binary_operator shift to state 50
 ## Reductions:
 
-State 98:
+State 102:
 ## Known stack suffix:
 ## FOR ID FROM expression TO
 ## LR(1) items:
-statement -> FOR ID FROM expression TO . expression STEP expression statement_list [ SEMICOLON EOF END ELSE ]
+statement -> FOR ID FROM expression TO . expression STEP expression statement [ SEMICOLON EOF END ELSE ]
 ## Transitions:
 -- On TAIL shift to state 3
 -- On SUB shift to state 4
 -- On SIN shift to state 5
 -- On POS shift to state 6
 -- On POINT shift to state 8
--- On NOT shift to state 10
--- On LCUR shift to state 11
--- On INT shift to state 12
--- On ID shift to state 13
--- On HEAD shift to state 14
--- On FLOOR shift to state 15
--- On FLOAT_OF_INT shift to state 16
--- On FLOAT shift to state 17
--- On COS shift to state 18
--- On COLOR shift to state 19
--- On BOOL_LITERAL shift to state 21
--- On unary_operator shift to state 22
--- On expression shift to state 99
+-- On PI shift to state 10
+-- On NOT shift to state 11
+-- On LPAR shift to state 12
+-- On LCUR shift to state 13
+-- On INT shift to state 14
+-- On ID shift to state 15
+-- On HEAD shift to state 16
+-- On FLOOR shift to state 17
+-- On FLOAT_OF_INT shift to state 18
+-- On FLOAT shift to state 19
+-- On COS shift to state 20
+-- On COLOR shift to state 21
+-- On BOOL_LITERAL shift to state 23
+-- On unary_operator shift to state 24
+-- On expression shift to state 103
 ## Reductions:
 
-State 99:
+State 103:
 ## Known stack suffix:
 ## FOR ID FROM expression TO expression
 ## LR(1) items:
 expression -> expression . binary_operator expression [ SUB STEP OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS AND ADD ]
 expression -> expression . DOT field_accessor [ SUB STEP OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS AND ADD ]
 expression -> expression . CONS expression [ SUB STEP OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS AND ADD ]
-statement -> FOR ID FROM expression TO expression . STEP expression statement_list [ SEMICOLON EOF END ELSE ]
+statement -> FOR ID FROM expression TO expression . STEP expression statement [ SEMICOLON EOF END ELSE ]
 ## Transitions:
--- On SUB shift to state 24
--- On STEP shift to state 100
--- On OR shift to state 25
--- On NE shift to state 26
--- On MUL shift to state 27
--- On MOD shift to state 28
--- On LT shift to state 29
--- On LE shift to state 30
--- On GT shift to state 31
--- On GE shift to state 32
--- On EQ shift to state 33
--- On DOT shift to state 34
--- On DIV shift to state 43
--- On CONS shift to state 44
--- On AND shift to state 46
--- On ADD shift to state 47
--- On binary_operator shift to state 48
+-- On SUB shift to state 26
+-- On STEP shift to state 104
+-- On OR shift to state 27
+-- On NE shift to state 28
+-- On MUL shift to state 29
+-- On MOD shift to state 30
+-- On LT shift to state 31
+-- On LE shift to state 32
+-- On GT shift to state 33
+-- On GE shift to state 34
+-- On EQ shift to state 35
+-- On DOT shift to state 36
+-- On DIV shift to state 45
+-- On CONS shift to state 46
+-- On AND shift to state 48
+-- On ADD shift to state 49
+-- On binary_operator shift to state 50
 ## Reductions:
 
-State 100:
+State 104:
 ## Known stack suffix:
 ## FOR ID FROM expression TO expression STEP
 ## LR(1) items:
-statement -> FOR ID FROM expression TO expression STEP . expression statement_list [ SEMICOLON EOF END ELSE ]
+statement -> FOR ID FROM expression TO expression STEP . expression statement [ SEMICOLON EOF END ELSE ]
 ## Transitions:
 -- On TAIL shift to state 3
 -- On SUB shift to state 4
 -- On SIN shift to state 5
 -- On POS shift to state 6
 -- On POINT shift to state 8
--- On NOT shift to state 10
--- On LCUR shift to state 11
--- On INT shift to state 12
--- On ID shift to state 13
--- On HEAD shift to state 14
--- On FLOOR shift to state 15
--- On FLOAT_OF_INT shift to state 16
--- On FLOAT shift to state 17
--- On COS shift to state 18
--- On COLOR shift to state 19
--- On BOOL_LITERAL shift to state 21
--- On unary_operator shift to state 22
--- On expression shift to state 101
+-- On PI shift to state 10
+-- On NOT shift to state 11
+-- On LPAR shift to state 12
+-- On LCUR shift to state 13
+-- On INT shift to state 14
+-- On ID shift to state 15
+-- On HEAD shift to state 16
+-- On FLOOR shift to state 17
+-- On FLOAT_OF_INT shift to state 18
+-- On FLOAT shift to state 19
+-- On COS shift to state 20
+-- On COLOR shift to state 21
+-- On BOOL_LITERAL shift to state 23
+-- On unary_operator shift to state 24
+-- On expression shift to state 105
 ## Reductions:
 
-State 101:
+State 105:
 ## Known stack suffix:
 ## FOR ID FROM expression TO expression STEP expression
 ## LR(1) items:
-expression -> expression . binary_operator expression [ SUB SEMICOLON PRINT OR NE MUL MOD LT LE IF ID GT GE FOREACH FOR EQ EOF END ELSE DRAW DOT DIV COPY CONS BEGIN AND ADD ]
-expression -> expression . DOT field_accessor [ SUB SEMICOLON PRINT OR NE MUL MOD LT LE IF ID GT GE FOREACH FOR EQ EOF END ELSE DRAW DOT DIV COPY CONS BEGIN AND ADD ]
-expression -> expression . CONS expression [ SUB SEMICOLON PRINT OR NE MUL MOD LT LE IF ID GT GE FOREACH FOR EQ EOF END ELSE DRAW DOT DIV COPY CONS BEGIN AND ADD ]
-statement -> FOR ID FROM expression TO expression STEP expression . statement_list [ SEMICOLON EOF END ELSE ]
+expression -> expression . binary_operator expression [ SUB SEMICOLON PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COLOR BOOL_TYP BEGIN AND ADD ]
+expression -> expression . DOT field_accessor [ SUB SEMICOLON PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COLOR BOOL_TYP BEGIN AND ADD ]
+expression -> expression . CONS expression [ SUB SEMICOLON PRINT POS POINT OR NE MUL MOD LT LIST LE INT_TYP IF GT GE FOREACH FOR FLOAT_TYP EQ EOF END ELSE DRAW DOT DIV COPY CONS COLOR BOOL_TYP BEGIN AND ADD ]
+statement -> FOR ID FROM expression TO expression STEP expression . statement [ SEMICOLON EOF END ELSE ]
 ## Transitions:
--- On SUB shift to state 24
+-- On SUB shift to state 26
 -- On PRINT shift to state 1
--- On OR shift to state 25
--- On NE shift to state 26
--- On MUL shift to state 27
--- On MOD shift to state 28
--- On LT shift to state 29
--- On LE shift to state 30
--- On IF shift to state 83
--- On ID shift to state 87
--- On GT shift to state 31
--- On GE shift to state 32
--- On FOREACH shift to state 90
--- On FOR shift to state 94
--- On EQ shift to state 33
--- On DRAW shift to state 102
--- On DOT shift to state 34
--- On DIV shift to state 43
--- On COPY shift to state 106
--- On CONS shift to state 44
--- On BEGIN shift to state 111
--- On AND shift to state 46
--- On ADD shift to state 47
--- On statement_list shift to state 117
--- On statement shift to state 114
--- On binary_operator shift to state 48
+-- On POS shift to state 75
+-- On POINT shift to state 76
+-- On OR shift to state 27
+-- On NE shift to state 28
+-- On MUL shift to state 29
+-- On MOD shift to state 30
+-- On LT shift to state 31
+-- On LIST shift to state 79
+-- On LE shift to state 32
+-- On INT_TYP shift to state 81
+-- On IF shift to state 90
+-- On GT shift to state 33
+-- On GE shift to state 34
+-- On FOREACH shift to state 94
+-- On FOR shift to state 98
+-- On FLOAT_TYP shift to state 82
+-- On EQ shift to state 35
+-- On DRAW shift to state 106
+-- On DOT shift to state 36
+-- On DIV shift to state 45
+-- On COPY shift to state 110
+-- On CONS shift to state 46
+-- On COLOR shift to state 83
+-- On BOOL_TYP shift to state 84
+-- On BEGIN shift to state 116
+-- On AND shift to state 48
+-- On ADD shift to state 49
+-- On type_expr shift to state 117
+-- On statement shift to state 126
+-- On binary_operator shift to state 50
 ## Reductions:
 -- On SEMICOLON EOF END ELSE
---   reduce production statement_list ->
+--   reduce production statement ->
 
-State 102:
+State 106:
 ## Known stack suffix:
 ## DRAW
 ## LR(1) items:
 statement -> DRAW . LPAR expression RPAR [ SEMICOLON EOF END ELSE ]
 ## Transitions:
--- On LPAR shift to state 103
+-- On LPAR shift to state 107
 ## Reductions:
 
-State 103:
+State 107:
 ## Known stack suffix:
 ## DRAW LPAR
 ## LR(1) items:
@@ -1716,22 +1858,24 @@ statement -> DRAW LPAR . expression RPAR [ SEMICOLON EOF END ELSE ]
 -- On SIN shift to state 5
 -- On POS shift to state 6
 -- On POINT shift to state 8
--- On NOT shift to state 10
--- On LCUR shift to state 11
--- On INT shift to state 12
--- On ID shift to state 13
--- On HEAD shift to state 14
--- On FLOOR shift to state 15
--- On FLOAT_OF_INT shift to state 16
--- On FLOAT shift to state 17
--- On COS shift to state 18
--- On COLOR shift to state 19
--- On BOOL_LITERAL shift to state 21
--- On unary_operator shift to state 22
--- On expression shift to state 104
+-- On PI shift to state 10
+-- On NOT shift to state 11
+-- On LPAR shift to state 12
+-- On LCUR shift to state 13
+-- On INT shift to state 14
+-- On ID shift to state 15
+-- On HEAD shift to state 16
+-- On FLOOR shift to state 17
+-- On FLOAT_OF_INT shift to state 18
+-- On FLOAT shift to state 19
+-- On COS shift to state 20
+-- On COLOR shift to state 21
+-- On BOOL_LITERAL shift to state 23
+-- On unary_operator shift to state 24
+-- On expression shift to state 108
 ## Reductions:
 
-State 104:
+State 108:
 ## Known stack suffix:
 ## DRAW LPAR expression
 ## LR(1) items:
@@ -1740,26 +1884,26 @@ expression -> expression . DOT field_accessor [ SUB RPAR OR NE MUL MOD LT LE GT 
 expression -> expression . CONS expression [ SUB RPAR OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS AND ADD ]
 statement -> DRAW LPAR expression . RPAR [ SEMICOLON EOF END ELSE ]
 ## Transitions:
--- On SUB shift to state 24
--- On RPAR shift to state 105
--- On OR shift to state 25
--- On NE shift to state 26
--- On MUL shift to state 27
--- On MOD shift to state 28
--- On LT shift to state 29
--- On LE shift to state 30
--- On GT shift to state 31
--- On GE shift to state 32
--- On EQ shift to state 33
--- On DOT shift to state 34
--- On DIV shift to state 43
--- On CONS shift to state 44
--- On AND shift to state 46
--- On ADD shift to state 47
--- On binary_operator shift to state 48
+-- On SUB shift to state 26
+-- On RPAR shift to state 109
+-- On OR shift to state 27
+-- On NE shift to state 28
+-- On MUL shift to state 29
+-- On MOD shift to state 30
+-- On LT shift to state 31
+-- On LE shift to state 32
+-- On GT shift to state 33
+-- On GE shift to state 34
+-- On EQ shift to state 35
+-- On DOT shift to state 36
+-- On DIV shift to state 45
+-- On CONS shift to state 46
+-- On AND shift to state 48
+-- On ADD shift to state 49
+-- On binary_operator shift to state 50
 ## Reductions:
 
-State 105:
+State 109:
 ## Known stack suffix:
 ## DRAW LPAR expression RPAR
 ## LR(1) items:
@@ -1769,158 +1913,211 @@ statement -> DRAW LPAR expression RPAR . [ SEMICOLON EOF END ELSE ]
 -- On SEMICOLON EOF END ELSE
 --   reduce production statement -> DRAW LPAR expression RPAR
 
-State 106:
+State 110:
 ## Known stack suffix:
 ## COPY
 ## LR(1) items:
-statement -> COPY . expression expression SEMICOLON [ SEMICOLON EOF END ELSE ]
+statement -> COPY . LPAR expression COMMA expression RPAR [ SEMICOLON EOF END ELSE ]
+## Transitions:
+-- On LPAR shift to state 111
+## Reductions:
+
+State 111:
+## Known stack suffix:
+## COPY LPAR
+## LR(1) items:
+statement -> COPY LPAR . expression COMMA expression RPAR [ SEMICOLON EOF END ELSE ]
 ## Transitions:
 -- On TAIL shift to state 3
 -- On SUB shift to state 4
 -- On SIN shift to state 5
 -- On POS shift to state 6
 -- On POINT shift to state 8
--- On NOT shift to state 10
--- On LCUR shift to state 11
--- On INT shift to state 12
--- On ID shift to state 13
--- On HEAD shift to state 14
--- On FLOOR shift to state 15
--- On FLOAT_OF_INT shift to state 16
--- On FLOAT shift to state 17
--- On COS shift to state 18
--- On COLOR shift to state 19
--- On BOOL_LITERAL shift to state 21
--- On unary_operator shift to state 22
--- On expression shift to state 107
+-- On PI shift to state 10
+-- On NOT shift to state 11
+-- On LPAR shift to state 12
+-- On LCUR shift to state 13
+-- On INT shift to state 14
+-- On ID shift to state 15
+-- On HEAD shift to state 16
+-- On FLOOR shift to state 17
+-- On FLOAT_OF_INT shift to state 18
+-- On FLOAT shift to state 19
+-- On COS shift to state 20
+-- On COLOR shift to state 21
+-- On BOOL_LITERAL shift to state 23
+-- On unary_operator shift to state 24
+-- On expression shift to state 112
 ## Reductions:
 
-State 107:
+State 112:
 ## Known stack suffix:
-## COPY expression
+## COPY LPAR expression
 ## LR(1) items:
-expression -> expression . binary_operator expression [ TAIL SUB SIN POS POINT OR NOT NE MUL MOD LT LE LCUR INT ID HEAD GT GE FLOOR FLOAT_OF_INT FLOAT EQ DOT DIV COS CONS COLOR BOOL_LITERAL AND ADD ]
-expression -> expression . DOT field_accessor [ TAIL SUB SIN POS POINT OR NOT NE MUL MOD LT LE LCUR INT ID HEAD GT GE FLOOR FLOAT_OF_INT FLOAT EQ DOT DIV COS CONS COLOR BOOL_LITERAL AND ADD ]
-expression -> expression . CONS expression [ TAIL SUB SIN POS POINT OR NOT NE MUL MOD LT LE LCUR INT ID HEAD GT GE FLOOR FLOAT_OF_INT FLOAT EQ DOT DIV COS CONS COLOR BOOL_LITERAL AND ADD ]
-statement -> COPY expression . expression SEMICOLON [ SEMICOLON EOF END ELSE ]
+expression -> expression . binary_operator expression [ SUB OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS COMMA AND ADD ]
+expression -> expression . DOT field_accessor [ SUB OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS COMMA AND ADD ]
+expression -> expression . CONS expression [ SUB OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS COMMA AND ADD ]
+statement -> COPY LPAR expression . COMMA expression RPAR [ SEMICOLON EOF END ELSE ]
+## Transitions:
+-- On SUB shift to state 26
+-- On OR shift to state 27
+-- On NE shift to state 28
+-- On MUL shift to state 29
+-- On MOD shift to state 30
+-- On LT shift to state 31
+-- On LE shift to state 32
+-- On GT shift to state 33
+-- On GE shift to state 34
+-- On EQ shift to state 35
+-- On DOT shift to state 36
+-- On DIV shift to state 45
+-- On CONS shift to state 46
+-- On COMMA shift to state 113
+-- On AND shift to state 48
+-- On ADD shift to state 49
+-- On binary_operator shift to state 50
+## Reductions:
+
+State 113:
+## Known stack suffix:
+## COPY LPAR expression COMMA
+## LR(1) items:
+statement -> COPY LPAR expression COMMA . expression RPAR [ SEMICOLON EOF END ELSE ]
 ## Transitions:
 -- On TAIL shift to state 3
--- On SUB shift to state 108
+-- On SUB shift to state 4
 -- On SIN shift to state 5
 -- On POS shift to state 6
 -- On POINT shift to state 8
--- On OR shift to state 25
--- On NOT shift to state 10
--- On NE shift to state 26
--- On MUL shift to state 27
--- On MOD shift to state 28
--- On LT shift to state 29
--- On LE shift to state 30
--- On LCUR shift to state 11
--- On INT shift to state 12
--- On ID shift to state 13
--- On HEAD shift to state 14
--- On GT shift to state 31
--- On GE shift to state 32
--- On FLOOR shift to state 15
--- On FLOAT_OF_INT shift to state 16
--- On FLOAT shift to state 17
--- On EQ shift to state 33
--- On DOT shift to state 34
--- On DIV shift to state 43
--- On COS shift to state 18
--- On CONS shift to state 44
--- On COLOR shift to state 19
--- On BOOL_LITERAL shift to state 21
--- On AND shift to state 46
--- On ADD shift to state 47
--- On unary_operator shift to state 22
--- On expression shift to state 109
--- On binary_operator shift to state 48
+-- On PI shift to state 10
+-- On NOT shift to state 11
+-- On LPAR shift to state 12
+-- On LCUR shift to state 13
+-- On INT shift to state 14
+-- On ID shift to state 15
+-- On HEAD shift to state 16
+-- On FLOOR shift to state 17
+-- On FLOAT_OF_INT shift to state 18
+-- On FLOAT shift to state 19
+-- On COS shift to state 20
+-- On COLOR shift to state 21
+-- On BOOL_LITERAL shift to state 23
+-- On unary_operator shift to state 24
+-- On expression shift to state 114
 ## Reductions:
 
-State 108:
+State 114:
 ## Known stack suffix:
-## SUB
+## COPY LPAR expression COMMA expression
 ## LR(1) items:
-binary_operator -> SUB . [ TAIL SUB SIN POS POINT NOT LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL ]
-unary_operator -> SUB . [ TAIL SUB SIN POS POINT NOT LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL ]
+expression -> expression . binary_operator expression [ SUB RPAR OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS AND ADD ]
+expression -> expression . DOT field_accessor [ SUB RPAR OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS AND ADD ]
+expression -> expression . CONS expression [ SUB RPAR OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS AND ADD ]
+statement -> COPY LPAR expression COMMA expression . RPAR [ SEMICOLON EOF END ELSE ]
 ## Transitions:
-## Reductions:
--- On TAIL SUB SIN POS POINT NOT LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL
---   reduce production binary_operator -> SUB
--- On TAIL SUB SIN POS POINT NOT LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL
---   reduce production unary_operator -> SUB
-** Conflict on TAIL SUB SIN POS POINT NOT LCUR INT ID HEAD FLOOR FLOAT_OF_INT FLOAT COS COLOR BOOL_LITERAL
-
-State 109:
-## Known stack suffix:
-## COPY expression expression
-## LR(1) items:
-expression -> expression . binary_operator expression [ SUB SEMICOLON OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS AND ADD ]
-expression -> expression . DOT field_accessor [ SUB SEMICOLON OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS AND ADD ]
-expression -> expression . CONS expression [ SUB SEMICOLON OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS AND ADD ]
-statement -> COPY expression expression . SEMICOLON [ SEMICOLON EOF END ELSE ]
-## Transitions:
--- On SUB shift to state 24
--- On SEMICOLON shift to state 110
--- On OR shift to state 25
--- On NE shift to state 26
--- On MUL shift to state 27
--- On MOD shift to state 28
--- On LT shift to state 29
--- On LE shift to state 30
--- On GT shift to state 31
--- On GE shift to state 32
--- On EQ shift to state 33
--- On DOT shift to state 34
--- On DIV shift to state 43
--- On CONS shift to state 44
--- On AND shift to state 46
--- On ADD shift to state 47
--- On binary_operator shift to state 48
+-- On SUB shift to state 26
+-- On RPAR shift to state 115
+-- On OR shift to state 27
+-- On NE shift to state 28
+-- On MUL shift to state 29
+-- On MOD shift to state 30
+-- On LT shift to state 31
+-- On LE shift to state 32
+-- On GT shift to state 33
+-- On GE shift to state 34
+-- On EQ shift to state 35
+-- On DOT shift to state 36
+-- On DIV shift to state 45
+-- On CONS shift to state 46
+-- On AND shift to state 48
+-- On ADD shift to state 49
+-- On binary_operator shift to state 50
 ## Reductions:
 
-State 110:
+State 115:
 ## Known stack suffix:
-## COPY expression expression SEMICOLON
+## COPY LPAR expression COMMA expression RPAR
 ## LR(1) items:
-statement -> COPY expression expression SEMICOLON . [ SEMICOLON EOF END ELSE ]
+statement -> COPY LPAR expression COMMA expression RPAR . [ SEMICOLON EOF END ELSE ]
 ## Transitions:
 ## Reductions:
 -- On SEMICOLON EOF END ELSE
---   reduce production statement -> COPY expression expression SEMICOLON
+--   reduce production statement -> COPY LPAR expression COMMA expression RPAR
 
-State 111:
+State 116:
 ## Known stack suffix:
 ## BEGIN
 ## LR(1) items:
 statement -> BEGIN . statement_list END [ SEMICOLON EOF END ELSE ]
 ## Transitions:
 -- On PRINT shift to state 1
--- On IF shift to state 83
--- On ID shift to state 87
--- On FOREACH shift to state 90
--- On FOR shift to state 94
--- On DRAW shift to state 102
--- On COPY shift to state 106
--- On BEGIN shift to state 111
--- On statement_list shift to state 112
--- On statement shift to state 114
+-- On POS shift to state 75
+-- On POINT shift to state 76
+-- On LIST shift to state 79
+-- On INT_TYP shift to state 81
+-- On IF shift to state 90
+-- On FOREACH shift to state 94
+-- On FOR shift to state 98
+-- On FLOAT_TYP shift to state 82
+-- On DRAW shift to state 106
+-- On COPY shift to state 110
+-- On COLOR shift to state 83
+-- On BOOL_TYP shift to state 84
+-- On BEGIN shift to state 116
+-- On type_expr shift to state 117
+-- On statement_list shift to state 121
+-- On statement shift to state 123
 ## Reductions:
--- On END
---   reduce production statement_list ->
+-- On SEMICOLON END
+--   reduce production statement ->
 
-State 112:
+State 117:
+## Known stack suffix:
+## type_expr
+## LR(1) items:
+statement -> type_expr . LPAR ID RPAR [ SEMICOLON EOF END ELSE ]
+## Transitions:
+-- On LPAR shift to state 118
+## Reductions:
+
+State 118:
+## Known stack suffix:
+## type_expr LPAR
+## LR(1) items:
+statement -> type_expr LPAR . ID RPAR [ SEMICOLON EOF END ELSE ]
+## Transitions:
+-- On ID shift to state 119
+## Reductions:
+
+State 119:
+## Known stack suffix:
+## type_expr LPAR ID
+## LR(1) items:
+statement -> type_expr LPAR ID . RPAR [ SEMICOLON EOF END ELSE ]
+## Transitions:
+-- On RPAR shift to state 120
+## Reductions:
+
+State 120:
+## Known stack suffix:
+## type_expr LPAR ID RPAR
+## LR(1) items:
+statement -> type_expr LPAR ID RPAR . [ SEMICOLON EOF END ELSE ]
+## Transitions:
+## Reductions:
+-- On SEMICOLON EOF END ELSE
+--   reduce production statement -> type_expr LPAR ID RPAR
+
+State 121:
 ## Known stack suffix:
 ## BEGIN statement_list
 ## LR(1) items:
 statement -> BEGIN statement_list . END [ SEMICOLON EOF END ELSE ]
 ## Transitions:
--- On END shift to state 113
+-- On END shift to state 122
 ## Reductions:
 
-State 113:
+State 122:
 ## Known stack suffix:
 ## BEGIN statement_list END
 ## LR(1) items:
@@ -1930,162 +2127,160 @@ statement -> BEGIN statement_list END . [ SEMICOLON EOF END ELSE ]
 -- On SEMICOLON EOF END ELSE
 --   reduce production statement -> BEGIN statement_list END
 
-State 114:
+State 123:
 ## Known stack suffix:
 ## statement
 ## LR(1) items:
-statement_list -> statement . SEMICOLON statement_list [ SEMICOLON EOF END ELSE ]
-statement_list -> statement . [ SEMICOLON EOF END ELSE ]
+statement_list -> statement . SEMICOLON statement_list [ END ]
+statement_list -> statement . [ END ]
 ## Transitions:
--- On SEMICOLON shift to state 115
+-- On SEMICOLON shift to state 124
 ## Reductions:
--- On SEMICOLON EOF END ELSE
+-- On END
 --   reduce production statement_list -> statement
-** Conflict on SEMICOLON
-
-State 115:
-## Known stack suffix:
-## statement SEMICOLON
-## LR(1) items:
-statement_list -> statement SEMICOLON . statement_list [ SEMICOLON EOF END ELSE ]
-## Transitions:
--- On PRINT shift to state 1
--- On IF shift to state 83
--- On ID shift to state 87
--- On FOREACH shift to state 90
--- On FOR shift to state 94
--- On DRAW shift to state 102
--- On COPY shift to state 106
--- On BEGIN shift to state 111
--- On statement_list shift to state 116
--- On statement shift to state 114
-## Reductions:
--- On SEMICOLON EOF END ELSE
---   reduce production statement_list ->
-
-State 116:
-## Known stack suffix:
-## statement SEMICOLON statement_list
-## LR(1) items:
-statement_list -> statement SEMICOLON statement_list . [ SEMICOLON EOF END ELSE ]
-## Transitions:
-## Reductions:
--- On SEMICOLON EOF END ELSE
---   reduce production statement_list -> statement SEMICOLON statement_list
-
-State 117:
-## Known stack suffix:
-## FOR ID FROM expression TO expression STEP expression statement_list
-## LR(1) items:
-statement -> FOR ID FROM expression TO expression STEP expression statement_list . [ SEMICOLON EOF END ELSE ]
-## Transitions:
-## Reductions:
--- On SEMICOLON EOF END ELSE
---   reduce production statement -> FOR ID FROM expression TO expression STEP expression statement_list
-
-State 118:
-## Known stack suffix:
-## FOREACH ID IN expression statement_list
-## LR(1) items:
-statement -> FOREACH ID IN expression statement_list . [ SEMICOLON EOF END ELSE ]
-## Transitions:
-## Reductions:
--- On SEMICOLON EOF END ELSE
---   reduce production statement -> FOREACH ID IN expression statement_list
-
-State 119:
-## Known stack suffix:
-## IF LPAR expression RPAR statement
-## LR(1) items:
-statement -> IF LPAR expression RPAR statement . SEMICOLON [ SEMICOLON EOF END ELSE ]
-statement -> IF LPAR expression RPAR statement . ELSE statement SEMICOLON [ SEMICOLON EOF END ELSE ]
-## Transitions:
--- On SEMICOLON shift to state 120
--- On ELSE shift to state 121
-## Reductions:
-
-State 120:
-## Known stack suffix:
-## IF LPAR expression RPAR statement SEMICOLON
-## LR(1) items:
-statement -> IF LPAR expression RPAR statement SEMICOLON . [ SEMICOLON EOF END ELSE ]
-## Transitions:
-## Reductions:
--- On SEMICOLON EOF END ELSE
---   reduce production statement -> IF LPAR expression RPAR statement SEMICOLON
-
-State 121:
-## Known stack suffix:
-## IF LPAR expression RPAR statement ELSE
-## LR(1) items:
-statement -> IF LPAR expression RPAR statement ELSE . statement SEMICOLON [ SEMICOLON EOF END ELSE ]
-## Transitions:
--- On PRINT shift to state 1
--- On IF shift to state 83
--- On ID shift to state 87
--- On FOREACH shift to state 90
--- On FOR shift to state 94
--- On DRAW shift to state 102
--- On COPY shift to state 106
--- On BEGIN shift to state 111
--- On statement shift to state 122
-## Reductions:
-
-State 122:
-## Known stack suffix:
-## IF LPAR expression RPAR statement ELSE statement
-## LR(1) items:
-statement -> IF LPAR expression RPAR statement ELSE statement . SEMICOLON [ SEMICOLON EOF END ELSE ]
-## Transitions:
--- On SEMICOLON shift to state 123
-## Reductions:
-
-State 123:
-## Known stack suffix:
-## IF LPAR expression RPAR statement ELSE statement SEMICOLON
-## LR(1) items:
-statement -> IF LPAR expression RPAR statement ELSE statement SEMICOLON . [ SEMICOLON EOF END ELSE ]
-## Transitions:
-## Reductions:
--- On SEMICOLON EOF END ELSE
---   reduce production statement -> IF LPAR expression RPAR statement ELSE statement SEMICOLON
 
 State 124:
 ## Known stack suffix:
-## LT argument_list GT statement_list
+## statement SEMICOLON
 ## LR(1) items:
-program -> LT argument_list GT statement_list . [ EOF ]
+statement_list -> statement SEMICOLON . statement_list [ END ]
+## Transitions:
+-- On PRINT shift to state 1
+-- On POS shift to state 75
+-- On POINT shift to state 76
+-- On LIST shift to state 79
+-- On INT_TYP shift to state 81
+-- On IF shift to state 90
+-- On FOREACH shift to state 94
+-- On FOR shift to state 98
+-- On FLOAT_TYP shift to state 82
+-- On DRAW shift to state 106
+-- On COPY shift to state 110
+-- On COLOR shift to state 83
+-- On BOOL_TYP shift to state 84
+-- On BEGIN shift to state 116
+-- On type_expr shift to state 117
+-- On statement_list shift to state 125
+-- On statement shift to state 123
+## Reductions:
+-- On SEMICOLON END
+--   reduce production statement ->
+
+State 125:
+## Known stack suffix:
+## statement SEMICOLON statement_list
+## LR(1) items:
+statement_list -> statement SEMICOLON statement_list . [ END ]
+## Transitions:
+## Reductions:
+-- On END
+--   reduce production statement_list -> statement SEMICOLON statement_list
+
+State 126:
+## Known stack suffix:
+## FOR ID FROM expression TO expression STEP expression statement
+## LR(1) items:
+statement -> FOR ID FROM expression TO expression STEP expression statement . [ SEMICOLON EOF END ELSE ]
+## Transitions:
+## Reductions:
+-- On SEMICOLON EOF END ELSE
+--   reduce production statement -> FOR ID FROM expression TO expression STEP expression statement
+
+State 127:
+## Known stack suffix:
+## FOREACH ID IN expression statement
+## LR(1) items:
+statement -> FOREACH ID IN expression statement . [ SEMICOLON EOF END ELSE ]
+## Transitions:
+## Reductions:
+-- On SEMICOLON EOF END ELSE
+--   reduce production statement -> FOREACH ID IN expression statement
+
+State 128:
+## Known stack suffix:
+## IF LPAR expression RPAR statement
+## LR(1) items:
+statement -> IF LPAR expression RPAR statement . [ SEMICOLON EOF END ELSE ]
+statement -> IF LPAR expression RPAR statement . ELSE statement [ SEMICOLON EOF END ELSE ]
+## Transitions:
+-- On ELSE shift to state 129
+## Reductions:
+-- On SEMICOLON EOF END ELSE
+--   reduce production statement -> IF LPAR expression RPAR statement
+** Conflict on ELSE
+
+State 129:
+## Known stack suffix:
+## IF LPAR expression RPAR statement ELSE
+## LR(1) items:
+statement -> IF LPAR expression RPAR statement ELSE . statement [ SEMICOLON EOF END ELSE ]
+## Transitions:
+-- On PRINT shift to state 1
+-- On POS shift to state 75
+-- On POINT shift to state 76
+-- On LIST shift to state 79
+-- On INT_TYP shift to state 81
+-- On IF shift to state 90
+-- On FOREACH shift to state 94
+-- On FOR shift to state 98
+-- On FLOAT_TYP shift to state 82
+-- On DRAW shift to state 106
+-- On COPY shift to state 110
+-- On COLOR shift to state 83
+-- On BOOL_TYP shift to state 84
+-- On BEGIN shift to state 116
+-- On type_expr shift to state 117
+-- On statement shift to state 130
+## Reductions:
+-- On SEMICOLON EOF END ELSE
+--   reduce production statement ->
+
+State 130:
+## Known stack suffix:
+## IF LPAR expression RPAR statement ELSE statement
+## LR(1) items:
+statement -> IF LPAR expression RPAR statement ELSE statement . [ SEMICOLON EOF END ELSE ]
+## Transitions:
+## Reductions:
+-- On SEMICOLON EOF END ELSE
+--   reduce production statement -> IF LPAR expression RPAR statement ELSE statement
+
+State 131:
+## Known stack suffix:
+## LT argument_list GT statement
+## LR(1) items:
+program -> LT argument_list GT statement . [ EOF ]
 ## Transitions:
 ## Reductions:
 -- On EOF
---   reduce production program -> LT argument_list GT statement_list
+--   reduce production program -> LT argument_list GT statement
 
-State 125:
+State 132:
 ## Known stack suffix:
 ## argument
 ## LR(1) items:
 argument_list -> argument . SEMICOLON argument_list [ GT ]
 argument_list -> argument . [ GT ]
 ## Transitions:
--- On SEMICOLON shift to state 126
+-- On SEMICOLON shift to state 133
 ## Reductions:
 -- On GT
 --   reduce production argument_list -> argument
 
-State 126:
+State 133:
 ## Known stack suffix:
 ## argument SEMICOLON
 ## LR(1) items:
 argument_list -> argument SEMICOLON . argument_list [ GT ]
 ## Transitions:
--- On STRING shift to state 72
--- On argument_list shift to state 127
--- On argument shift to state 125
+-- On STRING shift to state 78
+-- On argument_list shift to state 134
+-- On argument shift to state 132
 ## Reductions:
 -- On GT
 --   reduce production argument_list ->
 
-State 127:
+State 134:
 ## Known stack suffix:
 ## argument SEMICOLON argument_list
 ## LR(1) items:
@@ -2095,7 +2290,7 @@ argument_list -> argument SEMICOLON argument_list . [ GT ]
 -- On GT
 --   reduce production argument_list -> argument SEMICOLON argument_list
 
-State 128:
+State 135:
 ## Known stack suffix:
 ## EOF
 ## LR(1) items:
@@ -2105,26 +2300,26 @@ main -> EOF . [ # ]
 -- On #
 --   reduce production main -> EOF
 
-State 129:
+State 136:
 ## Known stack suffix:
-## statement_list
+## statement
 ## LR(1) items:
-program -> statement_list . [ EOF ]
+program -> statement . [ EOF ]
 ## Transitions:
 ## Reductions:
 -- On EOF
---   reduce production program -> statement_list
+--   reduce production program -> statement
 
-State 130:
+State 137:
 ## Known stack suffix:
 ## program
 ## LR(1) items:
 main -> program . EOF [ # ]
 ## Transitions:
--- On EOF shift to state 131
+-- On EOF shift to state 138
 ## Reductions:
 
-State 131:
+State 138:
 ## Known stack suffix:
 ## program EOF
 ## LR(1) items:
@@ -2134,7 +2329,7 @@ main -> program EOF . [ # ]
 -- On #
 --   reduce production main -> program EOF
 
-State 132:
+State 139:
 ## Known stack suffix:
 ## main
 ## LR(1) items:

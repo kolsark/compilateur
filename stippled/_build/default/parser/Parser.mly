@@ -14,20 +14,70 @@
 %token <float> FLOAT
 %token <int> INT
 %token <string> ID
-%token BOOL POINT LIST
-%token ADD SUB MUL DIV MOD AND OR EQ NE LT GT LE GE
-%token NOT USUB HEAD TAIL FLOOR FLOAT_OF_INT COS SIN 
-%token COLOR POS X Y BLUE RED GREEN
-%token PRINT COPY IF ELSE FOR FROM TO STEP FOREACH IN DRAW
-%token CONS DOT COMMA SEMICOLON BEGIN END LPAR RPAR LCUR RCUR LSQ RSQ
+%token BOOL_TYP
+// %token STRING erreur ?
+%token FLOAT_TYP 
+%token INT_TYP
+%token POINT 
+%token LIST 
+%token ADD 
+%token SUB 
+%token MUL 
+%token DIV 
+%token MOD 
+%token AND 
+%token OR 
+%token EQ 
+%token NE 
+%token LT 
+%token GT 
+%token LE 
+%token GE 
+%token NOT 
+%token HEAD 
+%token TAIL 
+%token FLOOR 
+%token FLOAT_OF_INT
+%token COS 
+%token SIN 
+%token COLOR 
+%token POS 
+%token X 
+%token Y
+%token PI
+%token BLUE 
+%token RED 
+%token GREEN 
+%token PRINT 
+%token COPY 
+%token IF 
+%token ELSE 
+%token FOR 
+%token FROM 
+%token TO 
+%token STEP 
+%token FOREACH 
+%token IN
+%token DRAW 
+%token CONS 
+%token DOT 
+%token COMMA 
+%token SEMICOLON 
+%token BEGIN 
+%token END 
+%token LPAR
+%token RPAR 
+%token LCUR 
+%token RCUR 
+// %token LSQ 
+// %token RSQ
 
+%nonassoc ELSE
 %left AND OR
 %left EQ NE LT GT LE GE
 %left ADD SUB 
 %left MUL DIV MOD
-%nonassoc ELSE NOT
-
-
+%nonassoc NOT
 
 %start <program> main
 
@@ -38,8 +88,8 @@ main:
     | EOF { Program([], Block([], Annotation.create $loc)) }
 
 program:
-    | LT a = argument_list GT s = statement_list { Program(a, Block(s, Annotation.create $loc)) }
-    | s = statement_list { Program([], Block(s, Annotation.create $loc)) }
+    | LT a = argument_list GT s = statement { Program(a, s) } // s = statement_list { Program(a, Block(s, Annotation.create $loc)) } ?
+    | s = statement { Program([], s) }(* A verifier *)
 
 argument_list:
     | a1 = argument SEMICOLON a2 = argument_list { a1 :: a2 } (* not empty -> pop the first *)
@@ -50,26 +100,27 @@ argument:
     | a1 = STRING a2 = type_expr { Argument(a1, a2, Annotation.create $loc) }
  
 statement:
-    | COPY e1 = expression e2 = expression SEMICOLON { Assignment(e1, e2, Annotation.create $loc) }
-    | e = ID t = type_expr SEMICOLON { Variable_declaration(e, t, Annotation.create $loc)}
-    | BEGIN s = statement_list END { Block(s, Annotation.create $loc) }
-    | IF LPAR e = expression RPAR s1 = statement SEMICOLON { IfThenElse(e, s1, Nop, Annotation.create $loc) }
-    | IF LPAR e = expression RPAR s1 = statement ELSE s2 = statement SEMICOLON { IfThenElse(e, s1, s2, Annotation.create $loc) }
-    | FOR n = ID FROM e1 = expression TO e2 = expression STEP e3 = expression s = statement_list { For(n, e1, e2, e3, Block(s, Annotation.create $loc), Annotation.create $loc) }
-    | FOREACH n = ID IN e = expression s = statement_list { Foreach(n ,e , Block(s, Annotation.create $loc), Annotation.create $loc) }
+    | COPY LPAR e1 = expression COMMA e2 = expression RPAR { Assignment(e1, e2, Annotation.create $loc) }
+    | t = type_expr LPAR e = ID RPAR { Variable_declaration(e, t, Annotation.create $loc)}
+    | BEGIN s = statement_list END { Block(s, Annotation.create $loc) } (* a verifier *)
+    | IF LPAR e = expression RPAR s1 = statement  { IfThenElse(e, s1, Nop, Annotation.create $loc) }
+    | IF LPAR e = expression RPAR s1 = statement ELSE s2 = statement  { IfThenElse(e, s1, s2, Annotation.create $loc) }
+    | FOR n = ID FROM e1 = expression TO e2 = expression STEP e3 = expression s = statement { For(n, e1, e2, e3, s, Annotation.create $loc) }
+    | FOREACH n = ID IN e = expression s = statement { Foreach(n, e, s, Annotation.create $loc) }
     | DRAW LPAR e = expression RPAR { Draw(e, Annotation.create $loc) }
     | PRINT LPAR e = expression RPAR { Print(e, Annotation.create $loc) }
-
+    | { Nop } (* A verifier *)
 
 statement_list:
     | s1 = statement SEMICOLON s2 = statement_list { s1 :: s2 } (* not empty -> pop the first *)
     | s = statement { [s] }
-    | { [] } (* empty statements list *)
+    (*| { [] }  empty statements list *)
 
 expression:
     | i = INT { Constant_i(i, Annotation.create $loc) }
     | f = FLOAT { Constant_f(f, Annotation.create $loc) }
     | b = BOOL_LITERAL { Constant_b(b, Annotation.create $loc) }
+    | PI { Constant_f(Float.pi, Annotation.create $loc) }
     | POS LPAR e1 = expression COMMA e2 = expression RPAR { Pos(e1, e2, Annotation.create $loc) }
     | COLOR LPAR e1 = expression COMMA e2 = expression COMMA e3 = expression RPAR { Color(e1, e2, e3, Annotation.create $loc) }
     | POINT LPAR e1 = expression COMMA e2 = expression RPAR { Point(e1, e2, Annotation.create $loc) }
@@ -79,6 +130,7 @@ expression:
     | e = expression DOT f = field_accessor { Field_accessor(f, e, Annotation.create $loc) }
     | LCUR e = expression_list RCUR { List(e, Annotation.create $loc) }
     | e1 = expression CONS e2 = expression { Cons(e1, e2, Annotation.create $loc) }
+    | LPAR e = expression RPAR { e }
     
 expression_list:
     | e = expression { [e] }
@@ -120,68 +172,10 @@ binary_operator:
     | GE { Ge }
 
 type_expr:
-    | INT { Type_int }
-    | FLOAT { Type_float }
-    | BOOL { Type_bool }
+    | INT_TYP { Type_int }
+    | FLOAT_TYP { Type_float }
+    | BOOL_TYP { Type_bool }
     | POS { Type_pos }
     | COLOR { Type_color }
     | POINT { Type_point }
-    | e = type_expr LIST { Type_list(e) }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-(*    | FLOAT { Expression.Constant_f(\$1, Annotation.create $loc) }
-    | BOOL { Expression.Constant_b(\$1, Annotation.create $loc) }
-    | STRING { Expression.Variable(\$1, Annotation.create $loc) }
-    | expression ADD expression { Expression.Binary_operator(Add, \$1, \$3, Annotation.create \$2) }
-    | expression SUB expression { Expression.Binary_operator(Sub, \$1, \$3, Annotation.create \$2) }
-    | expression MUL expression { Expression.Binary_operator(Mul, \$1, \$3, Annotation.create \$2) }
-    | expression DIV expression { Expression.Binary_operator(Div, \$1, \$3, Annotation.create \$2) }
-    | expression MOD expression { Expression.Binary_operator(Mod, \$1, \$3, Annotation.create \$2) }
-    | expression EQ expression { Expression.Binary_operator(Eq, \$1, \$3, Annotation.create \$2) }
-    | expression NE expression { Expression.Binary_operator(Ne, \$1, \$3, Annotation.create \$2) }
-    | expression LT expression { Expression.Binary_operator(Lt, \$1, \$3, Annotation.create \$2) }
-    | expression GT expression { Expression.Binary_operator(Gt, \$1, \$3, Annotation.create \$2) }
-    | expression LE expression { Expression.Binary_operator(Le, \$1, \$3, Annotation.create \$2) }
-    | expression GE expression { Expression.Binary_operator(Ge, \$1, \$3, Annotation.create \$2) }
-    | expression AND expression { Expression.Binary_operator(And, \$1, \$3, Annotation.create \$2) }
-    | expression OR expression { Expression.Binary_operator(Or, \$1, \$3, Annotation.create \$2) }
-    | NOT expression { Expression.Unary_operator(Not, \$2, Annotation.create \$1.loc) }
-
-declaration: 
-    | INT ID { Statement.Variable_declaration(\$2, Type_int, Annotation.create \$1.loc) }
-    | FLOAT ID { Statement.Variable_declaration(\$2, Type_float, Annotation.create \$1.loc) }
-    | BOOL ID { Statement.Variable_declaration(\$2, Type_bool, Annotation.create \$1.loc) }
-    | POINT ID { Statement.Variable_declaration(\$2, Type_point, Annotation.create \$1.loc) }
-    | COLOR ID { Statement.Variable_declaration(\$2, Type_color, Annotation.create \$1.loc) }
-    | LIST ID { Statement.Variable_declaration(\$2, Type_list, Annotation.create \$1.loc) }
-
-control_structure: 
-    | IF expression THEN statement ELSE statement END { Statement.IfThenElse(\$2, \$4, \$6, Annotation.create \$1.loc) }
-    | FOR ID IN expression TO expression DO statement END { Statement.For(\$2, \$4, \$6, \$8, Annotation.create \$1.loc) } 
-    | FOREACH ID IN expression DO statement END { Statement.Foreach(\$2, \$4, \$6, Annotation.create \$1.loc) } 
-    | WHILE expression DO statement END { Statement.While(\$2, \$4, Annotation.create \$1.loc) } 
-    | BEGIN statements END { Statement.Block(\$2, Annotation.create \$1.loc) } *)
-
+    | LIST LPAR e = type_expr RPAR { Type_list(e) } (* A verifier *)

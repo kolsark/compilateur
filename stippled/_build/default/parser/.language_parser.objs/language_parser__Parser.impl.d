@@ -1,1 +1,1 @@
-parser/Parser.ml: Annotation Ast MenhirLib Obj
+parser/Parser.ml: Annotation Ast Float MenhirLib Obj
