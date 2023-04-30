@@ -98,8 +98,8 @@ argument:
     | a1 = STRING a2 = type_expr { Argument(a1, a2, Annotation.create $loc) }
  
 statement:
-    | COPY e1 = expression e2 = expression SEMICOLON { Assignment(e1, e2, Annotation.create $loc) }
-    | e = ID t = type_expr SEMICOLON { Variable_declaration(e, t, Annotation.create $loc)}
+    | COPY LPAR e1 = expression COMMA e2 = expression RPAR SEMICOLON { Assignment(e1, e2, Annotation.create $loc) }
+    | t = type_expr LPAR e = ID RPAR SEMICOLON { Variable_declaration(e, t, Annotation.create $loc)}
     | BEGIN s = statement_list END { Block([s], Annotation.create $loc) }
     | IF LPAR e = expression RPAR s1 = statement SEMICOLON { IfThenElse(e, s1, Nop, Annotation.create $loc) }
     | IF LPAR e = expression RPAR s1 = statement ELSE s2 = statement SEMICOLON { IfThenElse(e, s1, s2, Annotation.create $loc) }
