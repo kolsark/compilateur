@@ -15,7 +15,6 @@
 %token <int> INT
 %token <string> ID
 %token BOOL_TYP
-%token STRING 
 %token FLOAT_TYP 
 %token INT_TYP
 %token POINT 
