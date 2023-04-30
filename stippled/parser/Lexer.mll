@@ -38,6 +38,7 @@ rule token = parse
     |"List"         {LIST}
     |"Not"          {NOT}
     |"Or"           {OR}
+    |"Pi"           {PI}
     |"Point"        {POINT}
     |"Pos"          {POS}
     |"Print"        {PRINT}

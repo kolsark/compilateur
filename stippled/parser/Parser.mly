@@ -15,7 +15,10 @@
 %token <int> INT
 %token <string> ID
 %token BOOL_TYP
+<<<<<<< HEAD
 // %token STRING erreur ?
+=======
+>>>>>>> d5595fbb0448e48d025bdbd4da52ceddc5a8d338
 %token FLOAT_TYP 
 %token INT_TYP
 %token POINT 
@@ -69,8 +72,14 @@
 %token RPAR 
 %token LCUR 
 %token RCUR 
+<<<<<<< HEAD
 // %token LSQ 
 // %token RSQ
+=======
+%token LSQ 
+%token RSQ
+%token PI
+>>>>>>> d5595fbb0448e48d025bdbd4da52ceddc5a8d338
 
 %nonassoc ELSE
 %left AND OR
@@ -100,6 +109,7 @@ argument:
     | a1 = STRING a2 = type_expr { Argument(a1, a2, Annotation.create $loc) }
  
 statement:
+<<<<<<< HEAD
     | COPY LPAR e1 = expression COMMA e2 = expression RPAR { Assignment(e1, e2, Annotation.create $loc) }
     | t = type_expr LPAR e = ID RPAR { Variable_declaration(e, t, Annotation.create $loc)}
     | BEGIN s = statement_list END { Block(s, Annotation.create $loc) } (* a verifier *)
@@ -107,6 +117,15 @@ statement:
     | IF LPAR e = expression RPAR s1 = statement ELSE s2 = statement  { IfThenElse(e, s1, s2, Annotation.create $loc) }
     | FOR n = ID FROM e1 = expression TO e2 = expression STEP e3 = expression s = statement { For(n, e1, e2, e3, s, Annotation.create $loc) }
     | FOREACH n = ID IN e = expression s = statement { Foreach(n, e, s, Annotation.create $loc) }
+=======
+    | COPY LPAR e1 = expression COMMA e2 = expression RPAR SEMICOLON { Assignment(e1, e2, Annotation.create $loc) }
+    | t = type_expr LPAR e = ID RPAR SEMICOLON { Variable_declaration(e, t, Annotation.create $loc)}
+    | BEGIN s = statement_list END { Block([s], Annotation.create $loc) }
+    | IF LPAR e = expression RPAR s1 = statement SEMICOLON { IfThenElse(e, s1, Nop, Annotation.create $loc) }
+    | IF LPAR e = expression RPAR s1 = statement ELSE s2 = statement SEMICOLON { IfThenElse(e, s1, s2, Annotation.create $loc) }
+    | FOR n = ID FROM e1 = expression TO e2 = expression STEP e3 = expression s = statement_list { For(n, e1, e2, e3, Block(s, Annotation.create $loc), Annotation.create $loc) }
+    | FOREACH n = ID IN e = expression s = statement_list { Foreach(n ,e , Block(s, Annotation.create $loc), Annotation.create $loc) }
+>>>>>>> d5595fbb0448e48d025bdbd4da52ceddc5a8d338
     | DRAW LPAR e = expression RPAR { Draw(e, Annotation.create $loc) }
     | PRINT LPAR e = expression RPAR { Print(e, Annotation.create $loc) }
     | { Nop } (* A verifier *)
@@ -119,6 +138,7 @@ statement_list:
 expression:
     | i = INT { Constant_i(i, Annotation.create $loc) }
     | f = FLOAT { Constant_f(f, Annotation.create $loc) }
+    | PI {Constant_float(Float.pi, Annotation.create $loc)}
     | b = BOOL_LITERAL { Constant_b(b, Annotation.create $loc) }
     | PI { Constant_f(Float.pi, Annotation.create $loc) }
     | POS LPAR e1 = expression COMMA e2 = expression RPAR { Pos(e1, e2, Annotation.create $loc) }
@@ -172,6 +192,7 @@ binary_operator:
     | GE { Ge }
 
 type_expr:
+<<<<<<< HEAD
     | INT_TYP { Type_int }
     | FLOAT_TYP { Type_float }
     | BOOL_TYP { Type_bool }
@@ -179,3 +200,12 @@ type_expr:
     | COLOR { Type_color }
     | POINT { Type_point }
     | LIST LPAR e = type_expr RPAR { Type_list(e) } (* A verifier *)
+=======
+    | INT_TYP { Int }
+    | FLOAT_TYP { Float }
+    | BOOL_TYP { Bool }
+    | POS { Pos }
+    | COLOR { Color }
+    | POINT { Point }
+    | t = LIST { List(t) } (* A verifier *)
+>>>>>>> d5595fbb0448e48d025bdbd4da52ceddc5a8d338

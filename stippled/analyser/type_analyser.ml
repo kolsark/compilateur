@@ -29,6 +29,7 @@ let type_analyser report program =
     ("sample_warning", (Lexing.dummy_pos, Lexing.dummy_pos));
   match program with _ -> ()
 
+<<<<<<< HEAD
 (* 
   let rec type_expression environment report expr =
     match expr with
@@ -38,5 +39,9 @@ let type_analyser report program =
     | Ast.Position _ -> Ast.Type_pos
     | Ast.Color _ -> Ast.Type_color
     | Ast.Point _ -> Ast.Type_point *)
+=======
+
+
+>>>>>>> d5595fbb0448e48d025bdbd4da52ceddc5a8d338
 
 
