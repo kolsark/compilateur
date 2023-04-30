@@ -125,7 +125,7 @@ expression:
     | e1 = expression e2 = binary_operator e3 = expression { Binary_operator(e2, e1, e3, Annotation.create $loc) }
     | e1 = unary_operator e2 = expression { Unary_operator(e1, e2, Annotation.create $loc) }
     | e = expression DOT f = field_accessor { Field_accessor(f, e, Annotation.create $loc) }
-    | LCUR e = expression_list RCUR { List(e, Annotation.create $loc) }
+    | LCUR l = LIST RCUR { List(l, Annotation.create $loc) }
     | e1 = expression CONS e2 = expression { Cons(e1, e2, Annotation.create $loc) }
     
 expression_list:
