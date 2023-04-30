@@ -170,7 +170,7 @@ binary_operator:
 type_expr:
     | INT { Int }
     | FLOAT { Float }
-    | BOOL { Bool }
+    | BOOL_TYP { Bool }
     | POS { Pos }
     | COLOR { Color }
     | POINT { Point }
