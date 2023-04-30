@@ -117,6 +117,7 @@ statement_list:
 expression:
     | i = INT { Constant_i(i, Annotation.create $loc) }
     | f = FLOAT { Constant_f(f, Annotation.create $loc) }
+    | Pi {Constant_float(Float.pi, Annotation.create $loc)}
     | b = BOOL_LITERAL { Constant_b(b, Annotation.create $loc) }
     | POS LPAR e1 = expression COMMA e2 = expression RPAR { Pos(e1, e2, Annotation.create $loc) }
     | COLOR LPAR e1 = expression COMMA e2 = expression COMMA e3 = expression RPAR { Color(e1, e2, e3, Annotation.create $loc) }
