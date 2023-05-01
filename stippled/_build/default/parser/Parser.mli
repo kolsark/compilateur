@@ -4,6 +4,7 @@
 type token = 
   | Y
   | X
+  | USUB
   | TO
   | TAIL
   | SUB
@@ -84,6 +85,7 @@ module MenhirInterpreter : sig
     | T_error : unit terminal
     | T_Y : unit terminal
     | T_X : unit terminal
+    | T_USUB : unit terminal
     | T_TO : unit terminal
     | T_TAIL : unit terminal
     | T_SUB : unit terminal
@@ -146,7 +148,6 @@ module MenhirInterpreter : sig
   (* The indexed type of nonterminal symbols. *)
   
   type _ nonterminal = 
-    | N_unary_operator : (Ast.unary_operator) nonterminal
     | N_type_expr : (Ast.type_expr) nonterminal
     | N_statement_list : (Ast.statement list) nonterminal
     | N_statement : (Ast.statement) nonterminal
@@ -155,7 +156,8 @@ module MenhirInterpreter : sig
     | N_field_accessor : (Ast.field_accessor) nonterminal
     | N_expression_list : (Ast.expression list) nonterminal
     | N_expression : (Ast.expression) nonterminal
-    | N_binary_operator : (Ast.binary_operator) nonterminal
+    | N_cons_expression : (Ast.expression) nonterminal
+    | N_base_expression : (Ast.expression) nonterminal
     | N_argument_list : (Ast.argument list) nonterminal
     | N_argument : (Ast.argument) nonterminal
   

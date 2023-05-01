@@ -1,6 +1,7 @@
 type token =
     Y
   | X
+  | USUB
   | TO
   | TAIL
   | SUB
@@ -69,7 +70,10 @@ val xv_main : Ast.program
 val xv_field_accessor : Ast.field_accessor
 val xv_expression_list : Ast.expression list
 val xv_expression : Ast.expression
+val xv_else_statement : Ast.statement
+val xv_cons_expression : Ast.expression
 val xv_binary_operator : Ast.binary_operator
+val xv_base_expression : Ast.expression
 val xv_argument_list : Ast.argument list
 val xv_argument : Ast.argument
 val menhir_end_marker : int

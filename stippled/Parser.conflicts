@@ -1,5 +1,5 @@
 
-** Conflict (shift/reduce) in state 128.
+** Conflict (shift/reduce) in state 149.
 ** Token involved: ELSE
 ** This state is reached from main after reading:
 
@@ -13,130 +13,15 @@ program EOF
 statement 
 (?)
 
-** In state 128, looking ahead at ELSE, reducing production
+** In state 149, looking ahead at ELSE, shifting is permitted
+** because of the following sub-derivation:
+
+IF LPAR expression RPAR statement ELSE statement 
+                        IF LPAR expression RPAR statement . ELSE statement 
+
+** In state 149, looking ahead at ELSE, reducing production
 ** statement -> IF LPAR expression RPAR statement
 ** is permitted because of the following sub-derivation:
 
 IF LPAR expression RPAR statement ELSE statement // lookahead token appears
                         IF LPAR expression RPAR statement . 
-
-** In state 128, looking ahead at ELSE, shifting is permitted
-** because of the following sub-derivation:
-
-IF LPAR expression RPAR statement 
-                        IF LPAR expression RPAR statement . ELSE statement 
-
-** Conflict (shift/reduce) in state 51.
-** Tokens involved: SUB OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS AND ADD
-** The following explanations concentrate on token SUB.
-** This state is reached from main after reading:
-
-PRINT LPAR expression binary_operator expression
-
-** The derivations that appear below have the following common factor:
-** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
-
-main 
-program EOF 
-statement 
-PRINT LPAR expression RPAR 
-           (?)
-
-** In state 51, looking ahead at SUB, shifting is permitted
-** because of the following sub-derivation:
-
-expression binary_operator expression 
-                           expression binary_operator expression 
-                                      . SUB 
-
-** In state 51, looking ahead at SUB, reducing production
-** expression -> expression binary_operator expression
-** is permitted because of the following sub-derivation:
-
-expression binary_operator expression // lookahead token appears because binary_operator can begin with SUB
-expression binary_operator expression . 
-
-** Conflict (shift/reduce) in state 47.
-** Tokens involved: SUB OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS AND ADD
-** The following explanations concentrate on token SUB.
-** This state is reached from main after reading:
-
-PRINT LPAR expression CONS expression
-
-** The derivations that appear below have the following common factor:
-** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
-
-main 
-program EOF 
-statement 
-PRINT LPAR expression RPAR 
-           (?)
-
-** In state 47, looking ahead at SUB, shifting is permitted
-** because of the following sub-derivation:
-
-expression CONS expression 
-                expression binary_operator expression 
-                           . SUB 
-
-** In state 47, looking ahead at SUB, reducing production
-** expression -> expression CONS expression
-** is permitted because of the following sub-derivation:
-
-expression binary_operator expression // lookahead token appears because binary_operator can begin with SUB
-expression CONS expression . 
-
-** Conflict (shift/reduce) in state 25.
-** Tokens involved: SUB OR NE MUL MOD LT LE GT GE EQ DOT DIV CONS AND ADD
-** The following explanations concentrate on token SUB.
-** This state is reached from main after reading:
-
-PRINT LPAR unary_operator expression
-
-** The derivations that appear below have the following common factor:
-** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
-
-main 
-program EOF 
-statement 
-PRINT LPAR expression RPAR 
-           (?)
-
-** In state 25, looking ahead at SUB, shifting is permitted
-** because of the following sub-derivation:
-
-unary_operator expression 
-               expression binary_operator expression 
-                          . SUB 
-
-** In state 25, looking ahead at SUB, reducing production
-** expression -> unary_operator expression
-** is permitted because of the following sub-derivation:
-
-expression binary_operator expression // lookahead token appears because binary_operator can begin with SUB
-unary_operator expression . 
-
-** Conflict (shift/reduce) in state 0.
-** Token involved: EOF
-** This state is reached from main after reading:
-
-
-
-** The derivations that appear below have the following common factor:
-** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
-
-main 
-(?)
-
-** In state 0, looking ahead at EOF, shifting is permitted
-** because of the following sub-derivation:
-
-. EOF 
-
-** In state 0, looking ahead at EOF, reducing production
-** statement ->
-** is permitted because of the following sub-derivation:
-
-program EOF // lookahead token appears
-statement // lookahead token is inherited
-. 
